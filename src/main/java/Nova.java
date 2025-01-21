@@ -2,18 +2,25 @@ import java.util.Scanner;
 
 public class Nova {
     public static void main(String[] args) {
-        String greet = "Hello! I'm Nova" + '\n' + "What can I do for you?";
-        String exit = "Bye. Hope to see you again soon!";
-        System.out.println(greet);
+        System.out.println("Hello! I'm Nova" + '\n' + "What can I do for you?");
 
         Scanner scanner = new Scanner(System.in);
+        String[] list = new String[100];
+        int i = 0;
         while (true) {
             String input = scanner.nextLine();
+            /* exit out of chat */
             if (input.equals("bye")) {
-                System.out.println(exit);
+                System.out.println("Bye. Hope to see you again soon!");
                 break;
+            } else if (input.equals("list")) {
+                for (int j = 0; j < i; j++) {
+                    System.out.println(j+1 + ". " + list[j]);
+                }
             } else {
-                System.out.println(input);
+                list[i] = input;
+                i += 1;
+                System.out.println("added: "+ input);
             }
         }
 
