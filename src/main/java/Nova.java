@@ -17,7 +17,7 @@ public class Nova {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else if (input.equals("list")) { /* print out all tasks*/
+            } else if (input.equals("list")) { // print out all tasks
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < array.size(); i++) {
                     System.out.println((i+1) + "." + array.get(i));
@@ -35,16 +35,31 @@ public class Nova {
                     }
                     case "deadline" -> {
                         String[] words2 = input.split("/");
-                        String deadline = words2[1];
-                        String task = words2[0].replace("deadline", "");
+                        String deadline = words2[1].replaceAll("by ", "");
+                        String task = words2[0].replace("deadline ", "");
                         Deadline activity = new Deadline(task, deadline);
                         array.add(activity);
                         System.out.println(addedToList + '\n' + activity);
+                        System.out.println("Now you have " + array.size() + " tasks in the list.");
                     }
-                    default -> {
-                        Task task = new Task(input);
+                    case "todo" -> {
+                        Todo task = new Todo(input.replace("todo ", ""));
                         array.add(task);
                         System.out.println(addedToList + '\n' + task);
+                        System.out.println("Now you have " + array.size() + " tasks in the list.");
+                    }
+                    case "event" -> {
+                        String[] words2 = input.split("/");
+                        String task = words2[0].replace("event ", "");
+                        String startingDate = words2[1].replace("from ", "");
+                        String deadline = words2[2].replace("to ", "");
+                        Event event = new Event(task, startingDate, deadline);
+                        array.add(event);
+                        System.out.println(addedToList + '\n' + event);
+                        System.out.println("Now you have " + array.size() + " tasks in the list.");
+                    }
+                    default -> {
+                        System.out.println("Invalid input");
                     }
                 }
             }
