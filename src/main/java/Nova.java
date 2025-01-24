@@ -8,7 +8,8 @@ public class Nova {
         Scanner scanner = new Scanner(System.in);
         String addedToList = "Got it. I've added this task:";
 
-        System.out.println("Hello! I'm Nova" + '\n' + "What can I do for you?");
+        System.out.println("Hello! I'm Nova");
+        System.out.println("What can I do for you?");
         while (true) {
             String input = scanner.nextLine();
             input = input.toLowerCase();
