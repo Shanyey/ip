@@ -12,7 +12,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String msg = "[E]" + super.toString() + "(from: " + startingDate + " to: " + by + ")";
+        String msg = "[E]" + super.toString() + " (from: " + startingDate + " to: " + by + ")";
         msg = msg.replace("  ", " ");
         return msg;
     }

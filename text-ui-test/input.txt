@@ -1,12 +1,12 @@
-todo read book
-deadline return book /by Sunday
-event lecture /from 2pm /to 4pm
-mark 1
-mark 2
-mark 3
-list
-unmark 1
-unmark 2
-unmark 3
-list
-bye
+Todo read book
+Deadline return book /by Sunday
+Event lecture /from 2pm /to 4pm
+Mark 1
+Mark 2
+Mark 3
+List
+Unmark 1
+Unmark 2
+Unmark 3
+List
+Bye

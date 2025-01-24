@@ -8,68 +8,71 @@ import java.util.Scanner;
 
 public class Nova {
     public static void main(String[] args) {
-        //initialise variables
-        ArrayList<Task> array = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String addedToList = "Got it. I've added this task:";
+        String addedToList = "I bet you're gonna be to lazy to do it anyway *rolls eyes*";
+        String numTasks1 = "Now you have ";
+        String numTasks2 = " tasks in the list.";
 
-        System.out.println("Hello! I'm Nova");
-        System.out.println("What can I do for you?");
+        System.out.println("Ughh, what can i do for you?");
         while (true) {
-            String input = scanner.nextLine();
-            input = input.toLowerCase();
-
-            /* exit out of chat */
-            if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+            String action = scanner.nextLine();
+            if (action.equals("Bye")) {
+                System.out.println("Goodbye! Hope to see you never!");
                 break;
-            } else if (input.equals("list")) { // print out all tasks
-                System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < array.size(); i++) {
-                    System.out.println((i + 1) + "." + array.get(i));
+            } else if (action.equals("List")) {
+                System.out.println("These are the tasks:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + "." + tasks.get(i));
                 }
-            } else { //check action
-                String[] words = input.split(" ");
-                switch (words[0]) {
+            } else {
+                String[] splitAction = action.split(" ", 2);
+
+                switch (splitAction[0].toLowerCase()) {
                     case "mark" -> {
-                        array.get(Integer.parseInt(words[1]) - 1).done();
-                        System.out.println("Nice! I've marked this task as done:" + '\n' + array.get(Integer.parseInt(words[1]) - 1));
+                        Task task = tasks.get(Integer.parseInt(splitAction[1]) - 1);
+                        task.setDone();
+                        System.out.println("Wow you actually managed to finish this task");
+                        System.out.println(task);
                     }
                     case "unmark" -> {
-                        array.get(Integer.parseInt(words[1]) - 1).undone();
-                        System.out.println("OK, I've marked this task as not done yet:" + '\n' + array.get(Integer.parseInt(words[1]) - 1));
+                        Task task = tasks.get(Integer.parseInt(splitAction[1]) - 1);
+                        task.setNotDone();
+                        System.out.println("I knew you wouldn't finish this task");
+                        System.out.println(task);
                     }
                     case "todo" -> {
-                        Todo task = new Todo(input.replace("todo ", ""));
-                        array.add(task);
-                        System.out.println(addedToList + '\n' + task);
-                        System.out.println("Now you have " + array.size() + " tasks in the list.");
+                        Todo todo = new Todo(splitAction[1]);
+                        tasks.add(todo);
+                        System.out.println(addedToList + "\n" + todo);
+                        System.out.println(numTasks1 + tasks.size() + numTasks2);
                     }
                     case "deadline" -> {
-                        String[] words2 = input.split("/");
-                        String deadline = words2[1].replaceAll("by ", "");
-                        String task = words2[0].replace("deadline ", "");
-                        Deadline activity = new Deadline(task, deadline);
-                        array.add(activity);
-                        System.out.println(addedToList + '\n' + activity);
-                        System.out.println("Now you have " + array.size() + " tasks in the list.");
+                        String[] slashedAction = splitAction[1].split("/"); // ["desc ", "by Sun"]
+                        String description = slashedAction[0].trim();
+                        String date = slashedAction[1].replace("by ", "");
+                        Deadline deadline = new Deadline(description, date);
+                        // gives "desc" and "Sun"
+                        tasks.add(deadline);
+                        System.out.println(addedToList + "\n" + deadline);
+                        System.out.println(numTasks1 + tasks.size() + numTasks2);
                     }
                     case "event" -> {
-                        String[] words2 = input.split("/");
-                        String task = words2[0].replace("event ", "");
-                        String startingDate = words2[1].replace("from ", "");
-                        String deadline = words2[2].replace("to ", "");
-                        Event event = new Event(task, startingDate, deadline);
-                        array.add(event);
-                        System.out.println(addedToList + '\n' + event);
-                        System.out.println("Now you have " + array.size() + " tasks in the list.");
+                        //["desc ", "from 2pm ", "to 4pm"]
+                        String[] slashedAction = splitAction[1].split("/");
+                        String description = slashedAction[0].trim();
+                        String from = slashedAction[1].replace("from ", "").trim();
+                        String to = slashedAction[2].replace("to ", "");
+                        Event event = new Event(description, from, to);
+                        tasks.add(event);
+                        System.out.println(addedToList + "\n" + event);
+                        System.out.println(numTasks1 + tasks.size() + numTasks2);
                     }
                     default -> {
-                        System.out.println("Invalid input");
+                        System.out.println("Fam I don't know what you are yapping about");
                     }
                 }
             }
         }
-
     }
 }
