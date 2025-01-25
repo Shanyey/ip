@@ -54,6 +54,17 @@ public class Nova {
         }
     }
 
+    //deletes a task
+    private static void executeDelete(int index) throws NovaException {
+        if (index > tasks.size() || index <= 0) {
+            throw new NovaException("invalid task number");
+        }
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
+        System.out.println("I knew you wouldn't do this task" + "\n" + task);
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+    }
+
     //add To-do task to the list
     private static void addToDo(String desc) {
         Todo todo = new Todo(desc);
@@ -76,6 +87,7 @@ public class Nova {
         printAddTask(task, tasks.size());
     }
 
+    //add Event tasks to the list
     private static void addEvent(String[] slashedAction) throws NovaException {
         if (slashedAction.length < 3) {
             throw new NovaException("too little arguments");
@@ -115,6 +127,7 @@ public class Nova {
                     switch (splitAction[0].toLowerCase()) {
                         case "mark" -> executeMark(Integer.parseInt(splitAction[1]));
                         case "unmark" -> executeUnMark(Integer.parseInt(splitAction[1]));
+                        case "delete" -> executeDelete(Integer.parseInt(splitAction[1]));
                         case "todo" -> addToDo(splitAction[1]);
                         case "deadline" -> addDeadline(slashedAction);
                         case "event" -> addEvent(slashedAction);
