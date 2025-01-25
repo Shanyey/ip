@@ -7,13 +7,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Nova {
+    private static void printMark(Task task) {
+        System.out.println("Wow you actually managed to finish this task");
+        System.out.println(task);
+    }
+    private static void printUnMark(Task task) {
+        System.out.println("I knew you wouldn't finish this task");
+        System.out.println(task);
+    }
+    private static void printAddTask(Task task, int tasksSize) {
+        System.out.println("I bet you're gonna be to lazy to do it anyway *rolls eyes*" + "\n" + task);
+        System.out.println("Now you have " + tasksSize + " tasks in the list.");
+    }
+
     public static void main(String[] args) {
+        //initialise variables
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        String addedToList = "I bet you're gonna be to lazy to do it anyway *rolls eyes*";
-        String numTasks1 = "Now you have ";
-        String numTasks2 = " tasks in the list.";
 
+        //start loop and get inputs
         System.out.println("Ughh, what can i do for you?");
         while (true) {
             String action = scanner.nextLine();
@@ -27,46 +39,37 @@ public class Nova {
                 }
             } else {
                 String[] splitAction = action.split(" ", 2);
+                String[] slashedAction = splitAction[1].split("/");
+                String description = slashedAction[0].trim();
 
                 switch (splitAction[0].toLowerCase()) {
                     case "mark" -> {
                         Task task = tasks.get(Integer.parseInt(splitAction[1]) - 1);
                         task.setDone();
-                        System.out.println("Wow you actually managed to finish this task");
-                        System.out.println(task);
+                        printMark(task);
                     }
                     case "unmark" -> {
                         Task task = tasks.get(Integer.parseInt(splitAction[1]) - 1);
                         task.setNotDone();
-                        System.out.println("I knew you wouldn't finish this task");
-                        System.out.println(task);
+                        printUnMark(task);
                     }
                     case "todo" -> {
                         Todo todo = new Todo(splitAction[1]);
                         tasks.add(todo);
-                        System.out.println(addedToList + "\n" + todo);
-                        System.out.println(numTasks1 + tasks.size() + numTasks2);
+                        printAddTask(todo, tasks.size());
                     }
                     case "deadline" -> {
-                        String[] slashedAction = splitAction[1].split("/"); // ["desc ", "by Sun"]
-                        String description = slashedAction[0].trim();
                         String date = slashedAction[1].replace("by ", "");
                         Deadline deadline = new Deadline(description, date);
-                        // gives "desc" and "Sun"
                         tasks.add(deadline);
-                        System.out.println(addedToList + "\n" + deadline);
-                        System.out.println(numTasks1 + tasks.size() + numTasks2);
+                        printAddTask(deadline, tasks.size());
                     }
                     case "event" -> {
-                        //["desc ", "from 2pm ", "to 4pm"]
-                        String[] slashedAction = splitAction[1].split("/");
-                        String description = slashedAction[0].trim();
                         String from = slashedAction[1].replace("from ", "").trim();
                         String to = slashedAction[2].replace("to ", "");
                         Event event = new Event(description, from, to);
                         tasks.add(event);
-                        System.out.println(addedToList + "\n" + event);
-                        System.out.println(numTasks1 + tasks.size() + numTasks2);
+                        printAddTask(event, tasks.size());
                     }
                     default -> {
                         System.out.println("Fam I don't know what you are yapping about");
