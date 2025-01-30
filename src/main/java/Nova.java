@@ -3,6 +3,7 @@ import Classes.Event;
 import Classes.Task;
 import Classes.Todo;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -66,8 +67,8 @@ public class Nova {
     }
 
     //add To-do task to the list
-    private static void addToDo(String desc) {
-        Todo todo = new Todo(desc);
+    private static void addToDo(String desc, boolean isDone) {
+        Todo todo = new Todo(desc, isDone);
         tasks.add(todo);
         printAddTask(todo, tasks.size());
     }
@@ -103,7 +104,57 @@ public class Nova {
         printAddTask(event, tasks.size());
     }
 
+    private static void saveTask() {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("taskData.txt"));
+            for (Task task : tasks) {
+                writer.write(task.toString() + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("saved tasks");
+    }
+
+    private static void loadTask() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("taskData.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                boolean isDone = line.charAt(4) == 'X';
+                switch (line.charAt(1)) {
+                    case 'T' -> tasks.add(new Todo(line.substring(7), isDone));
+                    case 'D' -> {
+                        int bracketIndex = line.indexOf("(by:");
+                        String desc = line.substring(7, bracketIndex).trim();
+                        int endBracketIndex = line.indexOf(')');
+                        String by = line.substring(bracketIndex + 1, endBracketIndex).replace("by:", "").trim();
+                        Deadline deadline = new Deadline(desc, by, isDone);
+                        tasks.add(deadline);
+                    }
+                    case 'E' -> {
+                        int startBracketIndex = line.indexOf('(');
+                        int endBracketIndex = line.indexOf(')');
+                        int toIndex = line.indexOf("to:");
+                        String desc = line.substring(7, startBracketIndex).trim();
+                        String from = line.substring(startBracketIndex + 1, toIndex).replace("from:","").trim();
+                        String to = line.substring(toIndex, endBracketIndex).replace("to:","").trim();
+                        tasks.add(new Event(desc, from, to, isDone));
+                    }
+                }
+            }
+            reader.close();
+        } catch (IOException ignored) {
+        }
+    }
+
     public static void main(String[] args) {
+        try {
+            loadTask();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //start loop and get inputs
         System.out.println("Ughh, what can i do for you?");
         while (true) {
@@ -122,21 +173,23 @@ public class Nova {
                 }
             } else {
                 try {
-                    String[] splitAction = parseAction(action);
-                    String[] slashedAction = splitAction[1].split("/");
+                    String[] splitAction = parseAction(action); //[ type, desc + others]
+                    String[] slashedAction = splitAction[1].split("/"); //[desc, by or start, to]
                     switch (splitAction[0].toLowerCase()) {
                         case "mark" -> executeMark(Integer.parseInt(splitAction[1]));
                         case "unmark" -> executeUnMark(Integer.parseInt(splitAction[1]));
                         case "delete" -> executeDelete(Integer.parseInt(splitAction[1]));
-                        case "todo" -> addToDo(splitAction[1]);
+                        case "todo" -> addToDo(splitAction[1], false);
                         case "deadline" -> addDeadline(slashedAction);
                         case "event" -> addEvent(slashedAction);
                         default -> System.out.println("Fam I don't know what you are yapping about");
                     }
                 } catch (NovaException e) {
                     System.out.println(e.getMessage());
+                    continue;
                 }
             }
+            saveTask();
         }
     }
 }
