@@ -5,6 +5,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    public String getSaveData() {
+        return this.toString();
+    }
+
     public Todo(String description, Boolean isDone) {
         super(description, isDone);
     }
