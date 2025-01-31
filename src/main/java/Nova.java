@@ -67,8 +67,8 @@ public class Nova {
     }
 
     //add To-do task to the list
-    private static void addToDo(String desc, boolean isDone) {
-        Todo todo = new Todo(desc, isDone);
+    private static void addToDo(String desc) {
+        Todo todo = new Todo(desc, false);
         tasks.add(todo);
         printAddTask(todo, tasks.size());
     }
@@ -108,7 +108,7 @@ public class Nova {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("taskData.txt"));
             for (Task task : tasks) {
-                writer.write(task.toString() + "\n");
+                writer.write(task.getSaveData() + "\n");
             }
             writer.close();
         } catch (IOException e) {
@@ -171,6 +171,7 @@ public class Nova {
                         System.out.println((i + 1) + "." + tasks.get(i));
                     }
                 }
+                continue;
             } else {
                 try {
                     String[] splitAction = parseAction(action); //[ type, desc + others]
@@ -179,7 +180,7 @@ public class Nova {
                         case "mark" -> executeMark(Integer.parseInt(splitAction[1]));
                         case "unmark" -> executeUnMark(Integer.parseInt(splitAction[1]));
                         case "delete" -> executeDelete(Integer.parseInt(splitAction[1]));
-                        case "todo" -> addToDo(splitAction[1], false);
+                        case "todo" -> addToDo(splitAction[1]);
                         case "deadline" -> addDeadline(slashedAction);
                         case "event" -> addEvent(slashedAction);
                         default -> System.out.println("Fam I don't know what you are yapping about");

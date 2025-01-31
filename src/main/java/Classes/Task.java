@@ -1,6 +1,6 @@
 package Classes;
 
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone = false; //set to false
 
@@ -28,6 +28,12 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public String getSavedData() {
+        return "test";
+    }
+
+    public abstract String getSaveData();
 
     @Override
     public String toString() {
