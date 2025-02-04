@@ -3,16 +3,15 @@ package storage;
 import java.io.*;
 import java.util.ArrayList;
 
-import Classes.Deadline;
-import Classes.Event;
-import Classes.Task;
-import Classes.Todo;
+import classes.Deadline;
+import classes.Event;
+import classes.Task;
+import classes.Todo;
 
 public class Storage {
     private static final String fileName = "taskData.txt";
 
     public void saveTask(ArrayList<Task> tasks) {
-
         try {
             FileWriter fileWriter = new FileWriter(fileName);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -26,8 +25,12 @@ public class Storage {
         System.out.println("saved tasks");
     }
 
-    public void loadTask(ArrayList<Task> tasks) {
+    /**
+     * @return ArrayList containing task objects
+     */
+    public ArrayList<Task> loadTask() {
         String line;
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -48,8 +51,8 @@ public class Storage {
                         int endBracketIndex = line.indexOf(')');
                         int toIndex = line.indexOf("to:");
                         String desc = line.substring(7, startBracketIndex).trim();
-                        String from = line.substring(startBracketIndex + 1, toIndex).replace("from:","").trim();
-                        String to = line.substring(toIndex, endBracketIndex).replace("to:","").trim();
+                        String from = line.substring(startBracketIndex + 1, toIndex).replace("from:", "").trim();
+                        String to = line.substring(toIndex, endBracketIndex).replace("to:", "").trim();
                         tasks.add(new Event(desc, from, to, isDone));
                     }
                 }
@@ -58,5 +61,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        return tasks;
     }
 }
