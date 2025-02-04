@@ -1,8 +1,10 @@
-import exceptions.NovaException;
-import parser.Parser;
-import storage.Storage;
-import taskList.TaskList;
-import ui.TextUi;
+package nova;
+
+import nova.exceptions.NovaException;
+import nova.parser.Parser;
+import nova.storage.Storage;
+import nova.taskList.TaskList;
+import nova.ui.TextUi;
 
 import java.util.Scanner;
 

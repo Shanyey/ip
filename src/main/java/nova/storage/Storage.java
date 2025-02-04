@@ -1,12 +1,12 @@
-package storage;
+package nova.storage;
 
 import java.io.*;
 import java.util.ArrayList;
 
-import classes.Deadline;
-import classes.Event;
-import classes.Task;
-import classes.Todo;
+import nova.classes.Deadline;
+import nova.classes.Event;
+import nova.classes.Task;
+import nova.classes.Todo;
 
 public class Storage {
     private static final String fileName = "taskData.txt";

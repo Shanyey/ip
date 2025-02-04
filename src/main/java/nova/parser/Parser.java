@@ -1,6 +1,6 @@
-package parser;
+package nova.parser;
 
-import exceptions.NovaException;
+import nova.exceptions.NovaException;
 
 public class Parser {
 

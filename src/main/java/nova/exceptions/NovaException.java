@@ -1,4 +1,4 @@
-package exceptions;
+package nova.exceptions;
 
 public class NovaException extends Exception {
     public NovaException(String message) {

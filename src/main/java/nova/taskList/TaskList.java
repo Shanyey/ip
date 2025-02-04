@@ -1,10 +1,10 @@
-package taskList;
+package nova.taskList;
 
-import classes.Deadline;
-import classes.Event;
-import classes.Task;
-import classes.Todo;
-import exceptions.NovaException;
+import nova.classes.Deadline;
+import nova.classes.Event;
+import nova.classes.Task;
+import nova.classes.Todo;
+import nova.exceptions.NovaException;
 
 import java.util.ArrayList;
 
