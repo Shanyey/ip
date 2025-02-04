@@ -1,4 +1,4 @@
-package Classes;
+package classes;
 
 public abstract class Task {
     private final String description;
@@ -37,6 +37,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return (isDone? "[X] " : "[ ] ") + description;
+        return (isDone ? "[X] " : "[ ] ") + description;
     }
 }
