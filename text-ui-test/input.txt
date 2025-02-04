@@ -1,6 +1,6 @@
 Todo read book
-Deadline return book /by Sunday
-Event lecture /from 2pm /to 4pm
+Deadline return book /by 2024-01-01 19:30
+Event lecture /from 2025-02-06 10:00 /to 2025-02-06 12:00
 Mark 1
 Mark 2
 Mark 3
@@ -9,4 +9,8 @@ Unmark 1
 Unmark 2
 Unmark 3
 List
+delete 3
+delete 2
+delete 1
+list
 Bye

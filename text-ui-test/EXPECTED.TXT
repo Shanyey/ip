@@ -1,31 +1,38 @@
 Ughh, what can i do for you?
-I bet you're gonna be to lazy to do it anyway *rolls eyes*
-[T][ ] read book
-Now you have 1 tasks in the list.
-I bet you're gonna be to lazy to do it anyway *rolls eyes*
-[D][ ] return book (by: Sunday)
-Now you have 2 tasks in the list.
-I bet you're gonna be to lazy to do it anyway *rolls eyes*
-[E][ ] lecture (from: 2pm to: 4pm)
-Now you have 3 tasks in the list.
-Wow you actually managed to finish this task
-[T][X] read book
-Wow you actually managed to finish this task
-[D][X] return book (by: Sunday)
-Wow you actually managed to finish this task
-[E][X] lecture (from: 2pm to: 4pm)
+saved tasks
+saved tasks
+saved tasks
+Marked [T][X] read book
+saved tasks
+Marked [D][X] return book (by: Jan 01 2024 19:30)
+saved tasks
+Marked [E][X] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
+saved tasks
 These are the tasks:
 1.[T][X] read book
-2.[D][X] return book (by: Sunday)
-3.[E][X] lecture (from: 2pm to: 4pm)
-I knew you wouldn't finish this task
-[T][ ] read book
-I knew you wouldn't finish this task
-[D][ ] return book (by: Sunday)
-I knew you wouldn't finish this task
-[E][ ] lecture (from: 2pm to: 4pm)
+2.[D][X] return book (by: Jan 01 2024 19:30)
+3.[E][X] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
+Unmarked [T][ ] read book
+saved tasks
+Unmarked [D][ ] return book (by: Jan 01 2024 19:30)
+saved tasks
+Unmarked [E][ ] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
+saved tasks
 These are the tasks:
 1.[T][ ] read book
-2.[D][ ] return book (by: Sunday)
-3.[E][ ] lecture (from: 2pm to: 4pm)
+2.[D][ ] return book (by: Jan 01 2024 19:30)
+3.[E][ ] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
+I knew you wouldn't do this task
+[E][ ] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
+Now you have 2 tasks in the list.
+saved tasks
+I knew you wouldn't do this task
+[D][ ] return book (by: Jan 01 2024 19:30)
+Now you have 1 tasks in the list.
+saved tasks
+I knew you wouldn't do this task
+[T][ ] read book
+Now you have 0 tasks in the list.
+saved tasks
+No tasks added.
 Goodbye! Hope to see you never!

@@ -12,10 +12,10 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     //PROBABLY SHIFT TO UI
-    private void printAddTask(Task task) {
-        System.out.println("I bet you're gonna be to lazy to do it anyway *rolls eyes*" + "\n" + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    }
+//    private void printAddTask(Task task) {
+//        System.out.println("I bet you're gonna be to lazy to do it anyway *rolls eyes*" + "\n" + task);
+//        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+//    }
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;

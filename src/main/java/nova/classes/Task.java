@@ -25,14 +25,6 @@ public abstract class Task {
         return isDone;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getSavedData() {
-        return "test";
-    }
-
     public abstract String getSaveData();
 
     @Override

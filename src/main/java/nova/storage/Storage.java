@@ -20,7 +20,7 @@ public class Storage {
             }
             bufferedWriter.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         System.out.println("saved tasks");
     }
