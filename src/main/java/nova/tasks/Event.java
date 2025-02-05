@@ -1,4 +1,4 @@
-package nova.classes;
+package nova.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ public class Event extends Task {
     protected String startingDate;
     protected LocalDateTime start;
     protected LocalDateTime end;
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected String saveData;
 
     /**
@@ -28,8 +28,8 @@ public class Event extends Task {
         super(description);
         this.by = by;
         this.startingDate = startingDate;
-        this.start = LocalDateTime.parse(startingDate, formatter);
-        this.end = LocalDateTime.parse(by, formatter);
+        this.start = LocalDateTime.parse(startingDate, FORMATTER);
+        this.end = LocalDateTime.parse(by, FORMATTER);
         this.saveData = "[E]" + super.toString() + " (from: " + startingDate + " to: " + by + ")";
     }
 
@@ -45,8 +45,8 @@ public class Event extends Task {
         super(description, isDone);
         this.by = by;
         this.startingDate = startingDate;
-        this.start = LocalDateTime.parse(startingDate, formatter);
-        this.end = LocalDateTime.parse(by, formatter);
+        this.start = LocalDateTime.parse(startingDate, FORMATTER);
+        this.end = LocalDateTime.parse(by, FORMATTER);
         this.saveData = "[E]" + super.toString() + " (from: " + startingDate + " to: " + by + ")";
     }
 

@@ -1,4 +1,4 @@
-package nova.classes;
+package nova.tasks;
 
 /**
  * Represents a To-do class which is a subtype of the Task class.

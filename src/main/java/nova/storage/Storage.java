@@ -1,17 +1,26 @@
 package nova.storage;
 
+<<<<<<< HEAD
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+=======
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.BufferedReader;
+
+>>>>>>> A-CodingStandard
 import java.util.ArrayList;
 
-import nova.classes.Deadline;
-import nova.classes.Event;
-import nova.classes.Task;
-import nova.classes.Todo;
+import nova.tasks.Deadline;
+import nova.tasks.Event;
+import nova.tasks.Task;
+import nova.tasks.Todo;
 
 /**
  * Handles the storage and retrieval of tasks from a file.
@@ -19,7 +28,7 @@ import nova.classes.Todo;
  * Tasks are stored in "taskData.txt" and retrieved when the program starts.
  */
 public class Storage {
-    private static final String fileName = "taskData.txt";
+    private static final String FILE_NAME = "taskData.txt";
 
     /**
      * Saves the list of tasks to a file.
@@ -28,6 +37,7 @@ public class Storage {
      * @param tasks The list of tasks to be saved.
      */
     public void saveTask(ArrayList<Task> tasks) {
+<<<<<<< HEAD
 //        try {
 //            FileWriter fileWriter = new FileWriter(fileName);
 //            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -39,6 +49,11 @@ public class Storage {
 //            System.out.println(e.getMessage());
 //        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
+=======
+        try {
+            FileWriter fileWriter = new FileWriter(FILE_NAME);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+>>>>>>> A-CodingStandard
             for (Task task : tasks) {
                 bufferedWriter.write(task.getSaveData() + "\n");
             }
@@ -56,7 +71,13 @@ public class Storage {
     public ArrayList<Task> loadTask() {
         String line;
         ArrayList<Task> tasks = new ArrayList<>();
+<<<<<<< HEAD
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+=======
+        try {
+            FileReader fileReader = new FileReader(FILE_NAME);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+>>>>>>> A-CodingStandard
             while ((line = bufferedReader.readLine()) != null) {
                 boolean isDone = line.charAt(4) == 'X';
                 switch (line.charAt(1)) {

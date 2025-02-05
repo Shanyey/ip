@@ -1,4 +1,4 @@
-package nova.classes;
+package nova.tasks;
 
 /**
  * Represents the base class for tasks in Nova chatbot.
