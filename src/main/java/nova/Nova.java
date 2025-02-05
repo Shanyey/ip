@@ -15,17 +15,11 @@ import java.util.Scanner;
  */
 public class Nova {
     private static final Scanner scanner = new Scanner(System.in);
-<<<<<<< HEAD
+
     private final Storage storage;
     private final TaskList tasks;
     private final Parser parser;
     private final TextUi textUi;
-=======
-    private static Storage storage;
-    private static TaskList tasks;
-    private static Parser parser;
-    private static TextUi textUi;
->>>>>>> A-CodingStandard
 
     /**
      * Constructs a Nova chatbot instance.

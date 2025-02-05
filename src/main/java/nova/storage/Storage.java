@@ -1,20 +1,10 @@
 package nova.storage;
 
-<<<<<<< HEAD
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-=======
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-
->>>>>>> A-CodingStandard
 import java.util.ArrayList;
 
 import nova.tasks.Deadline;
@@ -37,23 +27,7 @@ public class Storage {
      * @param tasks The list of tasks to be saved.
      */
     public void saveTask(ArrayList<Task> tasks) {
-<<<<<<< HEAD
-//        try {
-//            FileWriter fileWriter = new FileWriter(fileName);
-//            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-//            for (Task task : tasks) {
-//                bufferedWriter.write(task.getSaveData() + "\n");
-//            }
-//            bufferedWriter.close();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
-=======
-        try {
-            FileWriter fileWriter = new FileWriter(FILE_NAME);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
->>>>>>> A-CodingStandard
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (Task task : tasks) {
                 bufferedWriter.write(task.getSaveData() + "\n");
             }
@@ -71,13 +45,7 @@ public class Storage {
     public ArrayList<Task> loadTask() {
         String line;
         ArrayList<Task> tasks = new ArrayList<>();
-<<<<<<< HEAD
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
-=======
-        try {
-            FileReader fileReader = new FileReader(FILE_NAME);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
->>>>>>> A-CodingStandard
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
             while ((line = bufferedReader.readLine()) != null) {
                 boolean isDone = line.charAt(4) == 'X';
                 switch (line.charAt(1)) {
@@ -104,37 +72,6 @@ public class Storage {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
-//        try {
-//            FileReader fileReader = new FileReader(fileName);
-//            BufferedReader bufferedReader = new BufferedReader(fileReader);
-//            while ((line = bufferedReader.readLine()) != null) {
-//                boolean isDone = line.charAt(4) == 'X';
-//                switch (line.charAt(1)) {
-//                case 'T' -> tasks.add(new Todo(line.substring(7), isDone));
-//                case 'D' -> {
-//                    int bracketIndex = line.indexOf("(by:");
-//                    String desc = line.substring(7, bracketIndex).trim();
-//                    int endBracketIndex = line.indexOf(')');
-//                    String by = line.substring(bracketIndex + 1, endBracketIndex).replace("by:", "").trim();
-//                    Deadline deadline = new Deadline(desc, by, isDone);
-//                    tasks.add(deadline);
-//                }
-//                case 'E' -> {
-//                    int startBracketIndex = line.indexOf('(');
-//                    int endBracketIndex = line.indexOf(')');
-//                    int toIndex = line.indexOf("to:");
-//                    String desc = line.substring(7, startBracketIndex).trim();
-//                    String from = line.substring(startBracketIndex + 1, toIndex).replace("from:", "").trim();
-//                    String to = line.substring(toIndex, endBracketIndex).replace("to:", "").trim();
-//                    tasks.add(new Event(desc, from, to, isDone));
-//                }
-//                }
-//            }
-//            bufferedReader.close();
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//        }
         return tasks;
     }
 }
