@@ -2,7 +2,9 @@ package nova.taskList;
 
 import nova.classes.Task;
 import nova.exceptions.NovaException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

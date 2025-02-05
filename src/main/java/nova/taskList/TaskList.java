@@ -8,21 +8,48 @@ import nova.exceptions.NovaException;
 
 import java.util.ArrayList;
 
+/**
+ * Manages a list of tasks, providing methods to add, delete, and modify tasks.
+ * This class supports different task types such as To-do, Deadline, and Event.
+ * It also allows marking and unmarking tasks as completed.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Constructs a TaskList with an existing list of tasks.
+     *
+     * @param tasks The list of tasks to be managed.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns the list of tasks.
+     *
+     * @return An ArrayList of tasks.
+     */
     public ArrayList<Task> getTasks() {
         return tasks;
     }
 
+    /**
+     * Retrieves a specific task by its index.
+     *
+     * @param index The index of the task (0-based).
+     * @return The Task at the specified index.
+     */
     public Task getTask(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Marks a task as completed.
+     *
+     * @param index The index of the task.
+     * @throws NovaException If the index is out of range or the task is already marked as done.
+     */
     public void markTask(int index) throws NovaException {
         if (index > tasks.size() || index <= 0) {
             throw new NovaException("invalid task number");
@@ -36,6 +63,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Unmarks a completed task.
+     *
+     * @param index The index of the task.
+     * @throws NovaException If the index is out of range or the task is already unmarked.
+     */
     public void unMarkTask(int index) throws NovaException {
         if (index > tasks.size() || index <= 0) {
             throw new NovaException("invalid task number");
@@ -49,6 +82,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the list.
+     *
+     * @param index The index of the task.
+     * @throws NovaException If the index is out of range.
+     */
     public void deleteTask(int index) throws NovaException {
         if (index > tasks.size() || index <= 0) {
             throw new NovaException("invalid task number");
@@ -58,12 +97,23 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
+    /**
+     * Adds a new To-do task to the list.
+     *
+     * @param desc The description of the To-do task.
+     */
     public void addToDo(String desc) {
         Todo todo = new Todo(desc, false);
         tasks.add(todo);
-        //todo print added msg
     }
 
+    /**
+     * Adds a new Deadline task to the list.
+     *
+     * @param slashedAction A string array where the first element is the description
+     *                      and the second is the deadline (formatted as "by YYYY-MM-DD HH:mm").
+     * @throws NovaException If the format is invalid or missing required arguments.
+     */
     public void addDeadline(String[] slashedAction) throws NovaException {
         if (slashedAction.length < 2) {
             throw new NovaException("too little arguments");
@@ -75,9 +125,17 @@ public class TaskList {
         }
         Deadline deadline = new Deadline(desc, deadlineDate.replace("by ", ""));
         tasks.add(deadline);
-        //todo print added task
     }
 
+    /**
+     * Adds a new Event task to the list.
+     *
+     * @param slashedAction A string array where:
+     *                      - The first element is the description.
+     *                      - The second is the start date (formatted as "from YYYY-MM-DD HH:mm").
+     *                      - The third is the end date (formatted as "to YYYY-MM-DD HH:mm").
+     * @throws NovaException If the format is invalid or missing required arguments.
+     */
     public void addEvent(String[] slashedAction) throws NovaException {
         if (slashedAction.length < 3) {
             throw new NovaException("too little arguments");
@@ -90,16 +148,23 @@ public class TaskList {
         }
         Event event = new Event(desc, from.replace("from ", ""), to.replace("to ", ""));
         tasks.add(event);
-        //todo print added msg
     }
 
+    /**
+     * Checks if the task list is empty.
+     *
+     * @return true if there are no tasks, false otherwise.
+     */
     public boolean isEmpty() {
         return tasks.isEmpty();
     }
 
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The total number of tasks.
+     */
     public int size() {
         return tasks.size();
     }
-
-
 }

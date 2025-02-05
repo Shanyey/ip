@@ -7,7 +7,8 @@ import java.util.ArrayList;
 
 public class TextUi {
 
-    public TextUi() {}
+    public TextUi() {
+    }
 
     public void printWelcomeMessage() {
         System.out.println("Ughh, what can i do for you?");
