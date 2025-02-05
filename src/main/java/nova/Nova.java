@@ -3,14 +3,13 @@ package nova;
 import nova.exceptions.NovaException;
 import nova.parser.Parser;
 import nova.storage.Storage;
-import nova.taskList.TaskList;
+import nova.tasklist.TaskList;
 import nova.ui.TextUi;
 
 import java.util.Scanner;
 
 public class Nova {
     private static final Scanner scanner = new Scanner(System.in);
-    //private static ArrayList<Task> tasks;
     private static Storage storage;
     private static TaskList tasks;
     private static Parser parser;
@@ -38,13 +37,13 @@ public class Nova {
                     String[] splitAction = parser.parseBySpace(action); //[ type, desc + others]
                     String[] slashedAction = parser.splitBySlash(splitAction[1]); //[desc, by or start, to]
                     switch (splitAction[0].toLowerCase()) {
-                        case "mark" -> tasks.markTask(Integer.parseInt(splitAction[1]));
-                        case "unmark" -> tasks.unMarkTask(Integer.parseInt(splitAction[1]));
-                        case "delete" -> tasks.deleteTask(Integer.parseInt(splitAction[1]));
-                        case "todo" -> tasks.addToDo(splitAction[1]);
-                        case "deadline" -> tasks.addDeadline(slashedAction);
-                        case "event" -> tasks.addEvent(slashedAction);
-                        default -> textUi.printUnknownInputMessage();
+                    case "mark" -> tasks.markTask(Integer.parseInt(splitAction[1]));
+                    case "unmark" -> tasks.unMarkTask(Integer.parseInt(splitAction[1]));
+                    case "delete" -> tasks.deleteTask(Integer.parseInt(splitAction[1]));
+                    case "todo" -> tasks.addToDo(splitAction[1]);
+                    case "deadline" -> tasks.addDeadline(slashedAction);
+                    case "event" -> tasks.addEvent(slashedAction);
+                    default -> textUi.printUnknownInputMessage();
                     }
                 } catch (NovaException e) {
                     textUi.printErrorMessage(e);

@@ -1,6 +1,6 @@
-package nova.taskList;
+package nova.tasklist;
 
-import nova.classes.Task;
+import nova.tasks.Task;
 import nova.exceptions.NovaException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void addEvent_exceptionThrown() {
+    public void addEvent_missingByDate_exceptionThrown() {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskList tasksList = new TaskList(tasks);
         try {

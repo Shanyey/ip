@@ -1,4 +1,4 @@
-package nova.classes;
+package nova.tasks;
 
 public class Todo extends Task {
     public Todo(String description) {

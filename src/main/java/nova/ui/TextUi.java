@@ -1,7 +1,7 @@
 package nova.ui;
 
-import nova.classes.Task;
-import nova.taskList.TaskList;
+import nova.tasks.Task;
+import nova.tasklist.TaskList;
 
 import java.util.ArrayList;
 

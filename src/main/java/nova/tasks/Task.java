@@ -1,4 +1,4 @@
-package nova.classes;
+package nova.tasks;
 
 public abstract class Task {
     private final String description;
