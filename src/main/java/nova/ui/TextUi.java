@@ -1,9 +1,10 @@
 package nova.ui;
 
-import nova.tasks.Task;
-import nova.tasklist.TaskList;
-
 import java.util.ArrayList;
+
+import nova.tasklist.TaskList;
+import nova.tasks.Task;
+
 
 /**
  * The TextUi class handles user interface interactions by printing messages

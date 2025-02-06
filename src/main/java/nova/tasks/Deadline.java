@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected String by;
     protected LocalDateTime deadline;
-    protected DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected String saveData;
 
     /**
@@ -24,7 +24,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
-        this.deadline = LocalDateTime.parse(by, FORMATTER);
+        this.deadline = LocalDateTime.parse(by, formatter);
         this.saveData = "[D]" + super.toString() + " (by: " + by + ")";
     }
 
@@ -38,7 +38,7 @@ public class Deadline extends Task {
     public Deadline(String description, String by, Boolean isDone) {
         super(description, isDone);
         this.by = by;
-        this.deadline = LocalDateTime.parse(by, FORMATTER);
+        this.deadline = LocalDateTime.parse(by, formatter);
         this.saveData = "[D]" + super.toString() + " (by: " + by + ")";
     }
 
