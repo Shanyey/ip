@@ -58,6 +58,7 @@ public class Nova {
                     case "todo" -> tasks.addToDo(splitAction[1]);
                     case "deadline" -> tasks.addDeadline(slashedAction);
                     case "event" -> tasks.addEvent(slashedAction);
+                    //case "find" -> tasks.findTask(slashedAction[0]);
                     default -> textUi.printUnknownInputMessage();
                     }
                 } catch (NovaException e) {

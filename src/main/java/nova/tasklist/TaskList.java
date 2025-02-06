@@ -26,6 +26,24 @@ public class TaskList {
     }
 
     /**
+     * Checks if the task list is empty.
+     *
+     * @return true if there are no tasks, false otherwise.
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The total number of tasks.
+     */
+    public int size() {
+        return tasks.size();
+    }
+
+    /**
      * Returns the list of tasks.
      *
      * @return An ArrayList of tasks.
@@ -150,21 +168,18 @@ public class TaskList {
         tasks.add(event);
     }
 
-    /**
-     * Checks if the task list is empty.
-     *
-     * @return true if there are no tasks, false otherwise.
-     */
-    public boolean isEmpty() {
-        return tasks.isEmpty();
-    }
-
-    /**
-     * Returns the number of tasks in the list.
-     *
-     * @return The total number of tasks.
-     */
-    public int size() {
-        return tasks.size();
-    }
+//    /**
+//     * Prints out all tasks that matches the description
+//     *
+//     * @param description String used to match with tasks descriptions
+//     */
+//    public void findTask(String description) {
+//        int counter = 1;
+//        for (Task task : tasks) {
+//            if (task.getDescription().contains(description)) {
+//                System.out.println(counter  + ". " + task);
+//                counter++;
+//            }
+//        }
+//    }
 }
