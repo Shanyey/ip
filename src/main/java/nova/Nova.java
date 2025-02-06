@@ -1,12 +1,13 @@
 package nova;
 
+import java.util.Scanner;
+
 import nova.exceptions.NovaException;
 import nova.parser.Parser;
 import nova.storage.Storage;
 import nova.tasklist.TaskList;
 import nova.ui.TextUi;
 
-import java.util.Scanner;
 
 /**
  *  The main class for the Nova chatbot.

@@ -1,10 +1,11 @@
 package nova.parser;
 
-import nova.exceptions.NovaException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+
+import nova.exceptions.NovaException;
+
 
 public class ParserTest {
 

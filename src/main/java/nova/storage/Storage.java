@@ -67,6 +67,9 @@ public class Storage {
                     String to = line.substring(toIndex, endBracketIndex).replace("to:", "").trim();
                     tasks.add(new Event(desc, from, to, isDone));
                 }
+                default -> {
+                    //do nothing
+                }
                 }
             }
         } catch (IOException e) {

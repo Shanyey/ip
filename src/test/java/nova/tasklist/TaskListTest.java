@@ -1,13 +1,13 @@
 package nova.tasklist;
 
-import nova.tasks.Task;
-import nova.exceptions.NovaException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import nova.exceptions.NovaException;
+import nova.tasks.Task;
 
 public class TaskListTest {
     private final String[] arr = {"lecture", "from 2019-01-01 19:30"};
