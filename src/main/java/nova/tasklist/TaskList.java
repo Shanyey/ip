@@ -5,6 +5,7 @@ import nova.tasks.Event;
 import nova.tasks.Task;
 import nova.tasks.Todo;
 import nova.exceptions.NovaException;
+import nova.ui.TextUi;
 
 import java.util.ArrayList;
 
@@ -168,18 +169,18 @@ public class TaskList {
         tasks.add(event);
     }
 
-//    /**
-//     * Prints out all tasks that matches the description
-//     *
-//     * @param description String used to match with tasks descriptions
-//     */
-//    public void findTask(String description) {
-//        int counter = 1;
-//        for (Task task : tasks) {
-//            if (task.getDescription().contains(description)) {
-//                System.out.println(counter  + ". " + task);
-//                counter++;
-//            }
-//        }
-//    }
+    /**
+     * Finds all tasks that matches the specified description
+     *
+     * @param description String used to match with tasks descriptions
+     */
+    public void findTask(String description, TextUi textUi) {
+        ArrayList<Task> arr = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(description)) {
+                arr.add(task);
+            }
+        }
+        textUi.printFoundTasks(arr);
+    }
 }

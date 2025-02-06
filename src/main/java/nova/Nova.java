@@ -34,7 +34,7 @@ public class Nova {
 
     /**
      * Starts the chatbot and processes user input in a loop.
-     * The chatbot supports commands like "bye", "list", "mark", "unmark", "delete", "to-do", "deadline", and "event".
+     * The chatbot supports commands.
      * User inputs are parsed and appropriate actions are performed.
      */
     public void run() {
@@ -58,7 +58,7 @@ public class Nova {
                     case "todo" -> tasks.addToDo(splitAction[1]);
                     case "deadline" -> tasks.addDeadline(slashedAction);
                     case "event" -> tasks.addEvent(slashedAction);
-                    //case "find" -> tasks.findTask(slashedAction[0]);
+                    case "find" -> tasks.findTask(slashedAction[0], textUi);
                     default -> textUi.printUnknownInputMessage();
                     }
                 } catch (NovaException e) {
