@@ -5,6 +5,7 @@ import nova.tasks.Event;
 import nova.tasks.Task;
 import nova.tasks.Todo;
 import nova.exceptions.NovaException;
+import nova.ui.TextUi;
 
 import java.util.ArrayList;
 
@@ -23,6 +24,24 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    /**
+     * Checks if the task list is empty.
+     *
+     * @return true if there are no tasks, false otherwise.
+     */
+    public boolean isEmpty() {
+        return tasks.isEmpty();
+    }
+
+    /**
+     * Returns the number of tasks in the list.
+     *
+     * @return The total number of tasks.
+     */
+    public int size() {
+        return tasks.size();
     }
 
     /**
@@ -151,20 +170,17 @@ public class TaskList {
     }
 
     /**
-     * Checks if the task list is empty.
+     * Finds all tasks that matches the specified description
      *
-     * @return true if there are no tasks, false otherwise.
+     * @param description String used to match with tasks descriptions
      */
-    public boolean isEmpty() {
-        return tasks.isEmpty();
-    }
-
-    /**
-     * Returns the number of tasks in the list.
-     *
-     * @return The total number of tasks.
-     */
-    public int size() {
-        return tasks.size();
+    public void findTask(String description, TextUi textUi) {
+        ArrayList<Task> arr = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getDescription().contains(description)) {
+                arr.add(task);
+            }
+        }
+        textUi.printFoundTasks(arr);
     }
 }

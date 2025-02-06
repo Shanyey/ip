@@ -63,6 +63,15 @@ public abstract class Task {
     public abstract String getSaveData();
 
     /**
+     * Returns the description string.
+     *
+     * @return description as a String
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Returns a string representation of the task, including its completion status.
      *
      * @return A formatted string representing the task.
