@@ -10,7 +10,7 @@ import nova.tasks.Task;
  * The TextUi class handles user interface interactions by printing messages
  * and task lists to the console.
  */
-public class TextUi {
+public class Ui {
 
     /**
      * Prints the welcome message to the user.
@@ -54,7 +54,7 @@ public class TextUi {
         } else {
             System.out.println("These are the tasks:");
             for (int i = 0; i < tasksList.size(); i++) {
-                System.out.println((i + 1) + "." + tasks.getTask(i));
+                System.out.println((i + 1) + "." + tasks.getTaskAt(i));
             }
         }
     }
