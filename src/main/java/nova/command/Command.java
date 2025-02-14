@@ -107,6 +107,8 @@ public class Command {
     }
 
     public String executeCommand(String input) {
+
+        assert !input.isEmpty() : "Empty input";
         String[] spacedInput;
 
         try {
