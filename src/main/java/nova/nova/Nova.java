@@ -37,6 +37,8 @@ public class Nova {
             return command.executeBye();
         } else if (input.equalsIgnoreCase("list")) {
             return command.executeList();
+        } else if (input.isEmpty()) {
+            return "No command given";
         } else {
             return command.executeCommand(input);
         }
