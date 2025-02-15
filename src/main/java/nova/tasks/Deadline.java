@@ -23,6 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
+
         this.by = by;
         this.deadline = LocalDateTime.parse(by, formatter);
         this.saveData = "[D]" + super.toString() + " (by: " + by + ")";
@@ -37,6 +38,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by, Boolean isDone) {
         super(description, isDone);
+
         this.by = by;
         this.deadline = LocalDateTime.parse(by, formatter);
         this.saveData = "[D]" + super.toString() + " (by: " + by + ")";
@@ -60,6 +62,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String deadline = this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 }

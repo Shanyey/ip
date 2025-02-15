@@ -6,6 +6,7 @@ package nova.exceptions;
  * @author Shanyey
  */
 public class NovaException extends Exception {
+    public NovaException() {}
     /**
      * Constructs a new NovaException with the specified error message.
      *
@@ -15,5 +16,5 @@ public class NovaException extends Exception {
         super(message);
     }
 
-    public NovaException() {}
+
 }
