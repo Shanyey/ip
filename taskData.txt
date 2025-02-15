@@ -1,3 +1,0 @@
-[T][ ] read book
-[D][ ] return book (by: 2019-01-01 19:30)
-[E][ ] lecture (from: 2019-01-01 19:30 to: 2019-01-01 20:30)

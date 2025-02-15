@@ -26,6 +26,7 @@ public class Event extends Task {
      */
     public Event(String description, String startingDate, String by) {
         super(description);
+
         this.by = by;
         this.startingDate = startingDate;
         this.start = LocalDateTime.parse(startingDate, formatter);
@@ -43,6 +44,7 @@ public class Event extends Task {
      */
     public Event(String description, String startingDate, String by, Boolean isDone) {
         super(description, isDone);
+
         this.by = by;
         this.startingDate = startingDate;
         this.start = LocalDateTime.parse(startingDate, formatter);
@@ -69,6 +71,7 @@ public class Event extends Task {
     public String toString() {
         String start = this.start.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         String end = this.end.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
+
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
 }

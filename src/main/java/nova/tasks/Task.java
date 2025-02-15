@@ -80,4 +80,8 @@ public abstract class Task {
     public String toString() {
         return (isDone ? "[X] " : "[ ] ") + description;
     }
+
+    public boolean descriptionContains(String description) {
+        return this.description.contains(description);
+    }
 }

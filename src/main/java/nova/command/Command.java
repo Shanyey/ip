@@ -22,13 +22,19 @@ public class Command {
         return this.tasklist.getTaskListString();
     }
 
+    private void checkValidIndex(int taskIndex) throws NovaException {
+        if (taskIndex > this.tasklist.size() || taskIndex <= 0) {
+            throw new NovaException("Invalid task number");
+        }
+    }
+
     public String executeMark(String index) {
         try {
-            int taskIndex = Integer.parseInt(index); // throws number exception
-            if (taskIndex > this.tasklist.size() || taskIndex <= 0) {
-                throw new NovaException("Invalid task number");
-            }
-            this.tasklist.markTask(taskIndex); // throws nova exception if task is already done
+            int taskIndex = Integer.parseInt(index);
+            checkValidIndex(taskIndex);
+
+            this.tasklist.markTask(taskIndex);
+
             return "Marked task as done";
         } catch (NovaException e) {
             return e.getMessage();
@@ -37,13 +43,15 @@ public class Command {
         }
     }
 
+
+
     public String executeUnMark(String index) {
         try {
-            int taskIndex = Integer.parseInt(index); // throws number exception
-            if (taskIndex > this.tasklist.size() || taskIndex <= 0) {
-                throw new NovaException("Invalid task number");
-            }
-            this.tasklist.unMarkTask(taskIndex); // throws nova exception if task is already done
+            int taskIndex = Integer.parseInt(index);
+            checkValidIndex(taskIndex);
+
+            this.tasklist.unMarkTask(taskIndex);
+
             return "Unmarked Task";
         } catch (NovaException e) {
             return e.getMessage();
@@ -54,11 +62,11 @@ public class Command {
 
     public String executeDelete(String index) {
         try {
-            int taskIndex = Integer.parseInt(index); // throws number exception
-            if (taskIndex > this.tasklist.size() || taskIndex <= 0) {
-                throw new NovaException("Invalid task number");
-            }
-            this.tasklist.deleteTask(taskIndex); // throws nova exception if task is already done
+            int taskIndex = Integer.parseInt(index);
+            checkValidIndex(taskIndex);
+
+            this.tasklist.deleteTask(taskIndex);
+
             return "Deleted Task";
         } catch (NovaException e) {
             return e.getMessage();
@@ -116,6 +124,7 @@ public class Command {
         }
 
         String[] slashedInput = this.parser.splitBySlash(spacedInput[1]);
+
         switch (spacedInput[0].toLowerCase()) {
         case "mark" -> {
             return executeMark(spacedInput[1]);

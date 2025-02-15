@@ -63,9 +63,11 @@ public class TaskList {
         }
 
         StringBuilder response = new StringBuilder();
+
         for (int i = 0; i < tasks.size(); i++) {
             response.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
+
         return response.toString();
     }
 
@@ -87,12 +89,12 @@ public class TaskList {
      */
     public void markTask(int index) throws NovaException {
         Task task = tasks.get(index - 1);
+
         if (task.isDone()) {
             throw new NovaException("task is already done");
-        } else {
-            task.setDone();
-            System.out.println("Marked " + task); // can delete maybe
         }
+
+        task.setDone();
     }
 
     /**
@@ -103,12 +105,12 @@ public class TaskList {
      */
     public void unMarkTask(int index) throws NovaException {
         Task task = tasks.get(index - 1);
+
         if (!task.isDone()) {
             throw new NovaException("task is already unmarked");
-        } else {
-            task.setNotDone();
-            System.out.println("Unmarked " + task); // can delete
         }
+
+        task.setNotDone();
     }
 
     /**
@@ -121,8 +123,8 @@ public class TaskList {
         if (index > tasks.size() || index <= 0) {
             throw new NovaException("invalid task number");
         }
-        Task task = tasks.remove(index - 1);
-        System.out.println("Deleted" + task); // can delete
+
+        tasks.remove(index - 1);
     }
 
     /**
@@ -141,14 +143,17 @@ public class TaskList {
     public void addDeadline(String description, String deadlineDate) {
         Deadline deadline = new Deadline(description, deadlineDate.replace("by ", ""));
         tasks.add(deadline);
-        System.out.println("Added Deadline: " + deadline);
     }
 
     /**
      * Adds a new Event task to the list.
      */
     public void addEvent(String description, String from, String to) {
-        Event event = new Event(description, from.replace("from ", ""), to.replace("to ", ""));
+        String fromDate = from.replace("from ", "");
+        String toDate = to.replace("to ", "");
+
+        Event event = new Event(description, fromDate, toDate);
+
         tasks.add(event);
     }
 
@@ -159,12 +164,15 @@ public class TaskList {
      */
     public String findTask(String description) {
         StringBuilder response = new StringBuilder();
+
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            if (task.getDescription().contains(description)) {
+
+            if (task.descriptionContains(description)) {
                 response.append(i + 1).append(". ").append(task).append("\n");
             }
         }
+
         return response.toString();
     }
 
