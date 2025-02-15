@@ -21,9 +21,11 @@ public class Parser {
 
         action = action.trim();
         String[] splitAction = action.split(" ", 2);
+
         if (splitAction.length == 1) {
             throw new NovaException("too little arguments or invalid command");
         }
+
         return splitAction;
     }
 
