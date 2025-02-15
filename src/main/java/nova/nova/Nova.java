@@ -39,6 +39,10 @@ public class Nova {
             return command.executeList();
         } else if (input.isEmpty()) {
             return "No command given";
+        } else if (input.equalsIgnoreCase("undo")) {
+            return command.executeUndo();
+        } else if (input.equalsIgnoreCase("redo")) {
+            return command.executeRedo();
         } else {
             return command.executeCommand(input);
         }

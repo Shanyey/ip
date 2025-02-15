@@ -6,7 +6,7 @@ package nova.tasks;
  *
  * @author Shanyey
  */
-public abstract class Task {
+public abstract class Task implements Cloneable {
     private final String description;
     private boolean isDone = false;
 
@@ -63,15 +63,6 @@ public abstract class Task {
     public abstract String getSaveData();
 
     /**
-     * Returns the description string.
-     *
-     * @return description as a String
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
      * Returns a string representation of the task, including its completion status.
      *
      * @return A formatted string representing the task.
@@ -83,5 +74,14 @@ public abstract class Task {
 
     public boolean descriptionContains(String description) {
         return this.description.contains(description);
+    }
+
+    public Task clone() {
+        try {
+            return (Task) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -1,16 +1,23 @@
 package nova.command;
 
 import nova.exceptions.NovaException;
+import nova.history.HistoryManager;
 import nova.parser.Parser;
 import nova.tasklist.TaskList;
 
 public class Command {
-    TaskList tasklist;
-    Parser parser;
+    private final TaskList tasklist;
+    private final Parser parser;
+    private final HistoryManager historyManager;
 
     public Command(TaskList tasklist, Parser parser) {
         this.tasklist = tasklist;
         this.parser = parser;
+        this.historyManager = new HistoryManager();
+    }
+
+    private void saveState() {
+        historyManager.saveState(this.tasklist.getTasks());
     }
 
     public String executeBye() {
@@ -28,11 +35,12 @@ public class Command {
         }
     }
 
-    public String executeMark(String index) {
+    private String executeMark(String index) {
         try {
             int taskIndex = Integer.parseInt(index);
             checkValidIndex(taskIndex);
 
+            saveState();
             this.tasklist.markTask(taskIndex);
 
             return "Marked task as done";
@@ -43,13 +51,14 @@ public class Command {
         }
     }
 
+    private String executeUnMark(String index) {
 
 
-    public String executeUnMark(String index) {
         try {
             int taskIndex = Integer.parseInt(index);
             checkValidIndex(taskIndex);
 
+            saveState();
             this.tasklist.unMarkTask(taskIndex);
 
             return "Unmarked Task";
@@ -60,11 +69,12 @@ public class Command {
         }
     }
 
-    public String executeDelete(String index) {
+    private String executeDelete(String index) {
         try {
             int taskIndex = Integer.parseInt(index);
             checkValidIndex(taskIndex);
 
+            saveState();
             this.tasklist.deleteTask(taskIndex);
 
             return "Deleted Task";
@@ -73,20 +83,23 @@ public class Command {
         }
     }
 
-    public String executeFind(String description) {
+    private String executeFind(String description) {
         return tasklist.findTask(description);
     }
 
-    public String executeAddTodo(String description) {
+    private String executeAddTodo(String description) {
+        saveState();
+
         tasklist.addToDo(description);
         return "Added Task";
     }
 
-    public String executeAddDeadline(String[] slashedInput) {
+    private String executeAddDeadline(String[] slashedInput) {
         if (slashedInput.length < 2) {
             return "Too little arguments";
         }
 
+        saveState();
         String description = slashedInput[0].trim();
         String deadlineDate = slashedInput[1].trim();
 
@@ -98,7 +111,7 @@ public class Command {
         return "Added Deadline";
     }
 
-    public String executeAddEvent(String[] slashedInput) {
+    private String executeAddEvent(String[] slashedInput) {
         if (slashedInput.length < 3) {
             return "Too little arguments";
         }
@@ -110,12 +123,31 @@ public class Command {
         if (description.isEmpty() || !from.contains("from ") || !to.contains("to ")) {
             return "Invalid format";
         }
+
+        saveState();
         this.tasklist.addEvent(description, from, to);
         return "adding event";
     }
 
-    public String executeCommand(String input) {
+    public String executeUndo() {
+        try {
+            tasklist.setTasks(historyManager.getUndoState(tasklist.getTasks()));
+            return "Undo completed";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 
+    public String executeRedo() {
+        try {
+            tasklist.setTasks(historyManager.getRedoState(tasklist.getTasks()));
+            return "Redo completed";
+        } catch (NovaException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String executeCommand(String input) {
         assert !input.isEmpty() : "Empty input";
         String[] spacedInput;
 

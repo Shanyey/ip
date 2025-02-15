@@ -65,4 +65,9 @@ public class Deadline extends Task {
 
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
+
+    @Override
+    public Deadline clone() {
+        return (Deadline) super.clone();
+    }
 }
