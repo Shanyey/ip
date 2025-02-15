@@ -120,10 +120,6 @@ public class TaskList {
      * @throws NovaException If the index is out of range.
      */
     public void deleteTask(int index) throws NovaException {
-        if (index > tasks.size() || index <= 0) {
-            throw new NovaException("invalid task number");
-        }
-
         tasks.remove(index - 1);
     }
 
@@ -176,4 +172,8 @@ public class TaskList {
         return response.toString();
     }
 
+    public void setTasks(ArrayList<Task> tasks) {
+        this.tasks.clear();
+        this.tasks.addAll(tasks);
+    }
 }

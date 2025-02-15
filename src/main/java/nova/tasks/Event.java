@@ -74,4 +74,9 @@ public class Event extends Task {
 
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
+
+    @Override
+    public Deadline clone() {
+        return (Deadline) super.clone();
+    }
 }

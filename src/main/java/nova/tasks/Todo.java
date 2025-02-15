@@ -45,4 +45,9 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    @Override
+    public Todo clone() {
+        return (Todo) super.clone();
+    }
 }
