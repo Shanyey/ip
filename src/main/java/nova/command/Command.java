@@ -147,6 +147,14 @@ public class Command {
         }
     }
 
+    public String executeHelp() {
+        String singleCommands = "Single word commands are: \n List, Undo, Redo, Bye, Help\n\n";
+        String todoCommand = "Adding a todo task:\ntodo <description>\n\n";
+        String deadlineCommand = "Adding a deadline task:\ndeadline <description> /by <YYYY-MM-DD HH:MM>\n\n";
+        String eventCommand = "Adding a event task:\nevent <description> /from <YYYY-MM-DD HH:MM> /to <YYYY-MM-DD HH:MM>\n\n";
+        return singleCommands + todoCommand + deadlineCommand + eventCommand;
+    }
+
     public String executeCommand(String input) {
         assert !input.isEmpty() : "Empty input";
         String[] spacedInput;

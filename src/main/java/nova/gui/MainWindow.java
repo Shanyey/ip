@@ -23,8 +23,8 @@ public class MainWindow {
 
     private Nova nova;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/img.png"));
-    private final Image novaImage = new Image(this.getClass().getResourceAsStream("/images/img_2.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/userImage.png"));
+    private final Image novaImage = new Image(this.getClass().getResourceAsStream("/images/nova.png"));
 
     @FXML
     public void initialize() {
@@ -33,7 +33,8 @@ public class MainWindow {
     }
 
     private void showWelcomeMessage() {
-        String welcomeText = "Hello! I'm Nova, your personal assistant. How can I help you today?";
+        String welcomeText = "Hello! I'm Nova, your personal assistant.\nHow can I help you today?\n" +
+                "If you require assistance, feel free to type help!";
         dialogContainer.getChildren().add(DialogBox.getNovaDialog(welcomeText, novaImage));
     }
 

@@ -1,7 +1,7 @@
 package nova;
 
 import java.io.IOException;
-
+import javafx.scene.image.Image;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,6 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Nova");
+            stage.getIcons().add(new Image("/images/nova.png"));
             fxmlLoader.<MainWindow>getController().setNova(nova);  // inject the Nova instance
             stage.show();
         } catch (IOException e) {

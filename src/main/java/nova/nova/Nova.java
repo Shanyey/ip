@@ -32,7 +32,7 @@ public class Nova {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        if (input.equals("bye")) {
+        if (input.equalsIgnoreCase("bye")) {
             storage.saveTask(tasks.getTasks());
             return command.executeBye();
         } else if (input.equalsIgnoreCase("list")) {
@@ -43,8 +43,14 @@ public class Nova {
             return command.executeUndo();
         } else if (input.equalsIgnoreCase("redo")) {
             return command.executeRedo();
+        } else if (input.equalsIgnoreCase("help")) {
+            return command.executeHelp();
         } else {
             return command.executeCommand(input);
         }
+    }
+
+    public String getWelcomeMessage() {
+        return "welcome";
     }
 }
