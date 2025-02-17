@@ -1,10 +1,11 @@
 package nova.nova;
 
 import nova.command.Command;
+import nova.history.HistoryManager;
 import nova.parser.Parser;
 import nova.storage.Storage;
 import nova.tasklist.TaskList;
-
+import nova.ui.Ui;
 /**
  * The main class for the Nova chatbot.
  * Nova allows users to manage task by adding, deleting, marking and unmarking tasks.
@@ -13,9 +14,12 @@ import nova.tasklist.TaskList;
 public class Nova {
 
     private final Storage storage;
-    private final TaskList tasks;
     private final Parser parser;
+    private final HistoryManager historyManager;
+    private final Ui ui;
+    private final TaskList taskList;
     private final Command command;
+
 
     /**
      * Constructs a Nova chatbot instance.
@@ -23,34 +27,35 @@ public class Nova {
      */
     public Nova() {
         storage = new Storage();
-        tasks = new TaskList(storage.loadTask());
         parser = new Parser();
-        command = new Command(tasks, parser);
+        historyManager = new HistoryManager();
+        ui = new Ui();
+        taskList = new TaskList(storage.loadTask());
+        command = new Command(taskList, parser, historyManager);
     }
 
     /**
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        if (input.equalsIgnoreCase("bye")) {
-            storage.saveTask(tasks.getTasks());
-            return command.executeBye();
-        } else if (input.equalsIgnoreCase("list")) {
-            return command.executeList();
-        } else if (input.isEmpty()) {
-            return "No command given";
-        } else if (input.equalsIgnoreCase("undo")) {
-            return command.executeUndo();
-        } else if (input.equalsIgnoreCase("redo")) {
-            return command.executeRedo();
-        } else if (input.equalsIgnoreCase("help")) {
-            return command.executeHelp();
-        } else {
-            return command.executeCommand(input);
-        }
-    }
+        String response;
 
-    public String getWelcomeMessage() {
-        return "welcome";
+        if (input.isEmpty()) {
+            response = "ERROR: No command given";
+        } else if (input.equalsIgnoreCase("bye")) {
+            storage.saveTask(taskList.getTaskArrayList());
+            response = command.executeBye();
+        } else if (input.equalsIgnoreCase("list")) {
+            response = command.executeList();
+        } else if (input.equalsIgnoreCase("undo")) {
+            response = command.executeUndo();
+        } else if (input.equalsIgnoreCase("redo")) {
+            response = command.executeRedo();
+        } else if (input.equalsIgnoreCase("help")) {
+            response = command.executeHelp();
+        } else {
+            response = command.executeCommand(input);
+        }
+        return ui.returnMessage(response);
     }
 }

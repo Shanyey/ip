@@ -1,5 +1,5 @@
 .root {
-    main-color: rgb(237, 255, 242);       /*Create a looked-up color called "main-color" within root. */
+    main-color: rgb(190, 136, 199);       /*Create a looked-up color called "main-color" within root. */
     -fx-background-color: main-color;
 
 }
@@ -28,15 +28,17 @@
 .scroll-pane .viewport {
     -fx-background-color: transparent;
     -fx-background-image: url("/images/background.jpg");
+    -fx-background-size: 100% 100%;
+    -fx-background-repeat: no-repeat;
 }
 
 .scroll-bar {
     -fx-font-size: 10px;  /* Change width of scroll bar. */
-    -fx-background-color: main-color;
+    -fx-background-color: #ffffff;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: #ff9cb4;
+    -fx-background-color: main-color;
     -fx-background-radius: 1em;
 }
 

@@ -17,15 +17,13 @@ public class Parser {
      * @throws NovaException If the input string does not contain enough arguments.
      */
     public String[] parseBySpace(String action) throws NovaException {
-        assert action != null : "action cannot be null";
+        assert action != null : "ERROR: action cannot be null";
 
-        action = action.trim();
-        String[] splitAction = action.split(" ", 2);
+        String[] splitAction = action.trim().split(" ", 2);
 
         if (splitAction.length == 1) {
-            throw new NovaException("too little arguments or invalid command");
+            throw new NovaException("ERROR: too little arguments or invalid command");
         }
-
         return splitAction;
     }
 
@@ -37,7 +35,7 @@ public class Parser {
      * @return An array of substrings split by the '/' delimiter.
      */
     public String[] splitBySlash(String action) {
-        assert action != null : "action cannot be null";
+        assert action != null : "ERROR: action cannot be null";
         return action.split("/");
     }
 }

@@ -9,15 +9,16 @@ public class Command {
     private final TaskList tasklist;
     private final Parser parser;
     private final HistoryManager historyManager;
+    private final String notANumberMessage = "ERROR: Please input a number";
 
-    public Command(TaskList tasklist, Parser parser) {
+    public Command(TaskList tasklist, Parser parser, HistoryManager historyManager) {
         this.tasklist = tasklist;
         this.parser = parser;
-        this.historyManager = new HistoryManager();
+        this.historyManager = historyManager;
     }
 
     private void saveState() {
-        historyManager.saveState(this.tasklist.getTasks());
+        historyManager.saveState(this.tasklist.getTaskArrayList());
     }
 
     public String executeBye() {
@@ -31,7 +32,7 @@ public class Command {
 
     private void checkValidIndex(int taskIndex) throws NovaException {
         if (taskIndex > this.tasklist.size() || taskIndex <= 0) {
-            throw new NovaException("Invalid task number");
+            throw new NovaException("ERROR: Invalid task number");
         }
     }
 
@@ -43,17 +44,15 @@ public class Command {
             saveState();
             this.tasklist.markTask(taskIndex);
 
-            return "Marked task as done";
+            return "marked task as done OwO";
         } catch (NovaException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
-            return "Please enter a number";
+            return notANumberMessage;
         }
     }
 
     private String executeUnMark(String index) {
-
-
         try {
             int taskIndex = Integer.parseInt(index);
             checkValidIndex(taskIndex);
@@ -61,12 +60,16 @@ public class Command {
             saveState();
             this.tasklist.unMarkTask(taskIndex);
 
-            return "Unmarked Task";
+            return "unmarked your task OwO";
         } catch (NovaException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
-            return "Please enter a number";
+            return notANumberMessage;
         }
+    }
+
+    private String executeFind(String description) {
+        return tasklist.findTask(description);
     }
 
     private String executeDelete(String index) {
@@ -77,26 +80,24 @@ public class Command {
             saveState();
             this.tasklist.deleteTask(taskIndex);
 
-            return "Deleted Task";
+            return "deleted your task OwO";
         } catch (NovaException e) {
             return e.getMessage();
+        } catch (NumberFormatException e) {
+            return notANumberMessage;
         }
-    }
-
-    private String executeFind(String description) {
-        return tasklist.findTask(description);
     }
 
     private String executeAddTodo(String description) {
         saveState();
 
         tasklist.addToDo(description);
-        return "Added Task";
+        return "added to-do task " + description + " UwO!";
     }
 
     private String executeAddDeadline(String[] slashedInput) {
         if (slashedInput.length < 2) {
-            return "Too little arguments";
+            return "ERROR: Too little arguments";
         }
 
         saveState();
@@ -104,16 +105,16 @@ public class Command {
         String deadlineDate = slashedInput[1].trim();
 
         if (description.isEmpty() || !deadlineDate.contains("by ")) {
-            return "Invalid format";
+            return "ERROR: Invalid format";
         }
 
         tasklist.addDeadline(description, deadlineDate);
-        return "Added Deadline";
+        return "added deadline " + description + " OwU!";
     }
 
     private String executeAddEvent(String[] slashedInput) {
         if (slashedInput.length < 3) {
-            return "Too little arguments";
+            return "ERROR: Too little arguments";
         }
 
         String description = slashedInput[0].trim();
@@ -121,18 +122,18 @@ public class Command {
         String to = slashedInput[2].trim();
 
         if (description.isEmpty() || !from.contains("from ") || !to.contains("to ")) {
-            return "Invalid format";
+            return "ERROR: Invalid format";
         }
 
         saveState();
         this.tasklist.addEvent(description, from, to);
-        return "adding event";
+        return "added event" + description + " :("    ;
     }
 
     public String executeUndo() {
         try {
-            tasklist.setTasks(historyManager.getUndoState(tasklist.getTasks()));
-            return "Undo completed";
+            tasklist.setTaskArrayList(historyManager.getUndoState(tasklist.getTaskArrayList()));
+            return "your action has been undone :)";
         } catch (Exception e) {
             return e.getMessage();
         }
@@ -140,7 +141,7 @@ public class Command {
 
     public String executeRedo() {
         try {
-            tasklist.setTasks(historyManager.getRedoState(tasklist.getTasks()));
+            tasklist.setTaskArrayList(historyManager.getRedoState(tasklist.getTaskArrayList()));
             return "Redo completed";
         } catch (NovaException e) {
             return e.getMessage();
@@ -148,15 +149,21 @@ public class Command {
     }
 
     public String executeHelp() {
-        String singleCommands = "Single word commands are: \n List, Undo, Redo, Bye, Help\n\n";
+        String singleCommands = "Single word commands are: \n List, Undo, Redo, Find, Bye, Help\n\n";
         String todoCommand = "Adding a todo task:\ntodo <description>\n\n";
         String deadlineCommand = "Adding a deadline task:\ndeadline <description> /by <YYYY-MM-DD HH:MM>\n\n";
-        String eventCommand = "Adding a event task:\nevent <description> /from <YYYY-MM-DD HH:MM> /to <YYYY-MM-DD HH:MM>\n\n";
+
+        String eventCommand = """
+                Adding a event task:
+                event <description> /from <YYYY-MM-DD HH:MM>
+                /to <YYYY-MM-DD HH:MM>
+                """;
+
         return singleCommands + todoCommand + deadlineCommand + eventCommand;
     }
 
     public String executeCommand(String input) {
-        assert !input.isEmpty() : "Empty input";
+        assert !input.isEmpty() : "ERROR: Empty input";
         String[] spacedInput;
 
         try {
@@ -174,11 +181,11 @@ public class Command {
         case "unmark" -> {
             return executeUnMark(spacedInput[1]);
         }
-        case "delete" -> {
-            return executeDelete(spacedInput[1]);
-        }
         case "find" -> {
             return executeFind(spacedInput[1]);
+        }
+        case "delete" -> {
+            return executeDelete(spacedInput[1]);
         }
         case "todo" -> {
             return executeAddTodo(spacedInput[1]);

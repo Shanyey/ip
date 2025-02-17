@@ -23,7 +23,7 @@ public class HistoryManager {
 
     public ArrayList<Task> getUndoState(ArrayList<Task> currentState) throws NovaException {
         if (undoStack.isEmpty()) {
-            throw new NovaException("Nothing to undo");
+            throw new NovaException("ERROR: Nothing to undo");
         }
 
         redoStack.push(deepCopy(currentState));
@@ -32,7 +32,7 @@ public class HistoryManager {
 
     public ArrayList<Task> getRedoState(ArrayList<Task> currentState) throws NovaException {
         if (redoStack.isEmpty()) {
-            throw new NovaException("Nothing to redo");
+            throw new NovaException("ERROR: Nothing to redo");
         }
 
         undoStack.push(deepCopy(currentState));

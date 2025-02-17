@@ -76,7 +76,7 @@ public class Event extends Task {
     }
 
     @Override
-    public Deadline clone() {
-        return (Deadline) super.clone();
+    public Event clone() {
+        return (Event) super.clone();
     }
 }

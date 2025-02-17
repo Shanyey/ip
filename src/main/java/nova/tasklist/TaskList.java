@@ -9,76 +9,66 @@ import nova.tasks.Task;
 import nova.tasks.Todo;
 
 /**
- * Manages a list of tasks, providing methods to add, delete, and modify tasks.
+ * Manages a list of taskArrayList, providing methods to add, delete, and modify taskArrayList.
  * This class supports different task types such as To-do, Deadline, and Event.
- * It also allows marking and unmarking tasks as completed.
+ * It also allows marking and unmarking taskArrayList as completed.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private final ArrayList<Task> taskArrayList;
 
     /**
-     * Constructs a TaskList with an existing list of tasks.
+     * Constructs a TaskList with an existing list of taskArrayList.
      *
-     * @param tasks The list of tasks to be managed.
+     * @param taskArrayList The list of taskArrayList to be managed.
      */
-    public TaskList(ArrayList<Task> tasks) {
-        this.tasks = tasks;
+    public TaskList(ArrayList<Task> taskArrayList) {
+        this.taskArrayList = taskArrayList;
     }
 
     /**
      * Checks if the task list is empty.
      *
-     * @return true if there are no tasks, false otherwise.
+     * @return true if there are no taskArrayList, false otherwise.
      */
     public boolean isEmpty() {
-        return tasks.isEmpty();
+        return taskArrayList.isEmpty();
     }
 
     /**
-     * Returns the number of tasks in the list.
+     * Returns the number of taskArrayList in the list.
      *
-     * @return The total number of tasks.
+     * @return The total number of taskArrayList.
      */
     public int size() {
-        return tasks.size();
+        return taskArrayList.size();
     }
 
     /**
-     * Returns the list of tasks.
+     * Returns the list of taskArrayList.
      *
-     * @return An ArrayList of tasks.
+     * @return An ArrayList of taskArrayList.
      */
-    public ArrayList<Task> getTasks() {
-        return tasks;
+    public ArrayList<Task> getTaskArrayList() {
+        return taskArrayList;
     }
 
     /**
-     * Returns all tasks stored as a string
+     * Returns all taskArrayList stored as a string
      *
-     * @return String format of all tasks stored
+     * @return String format of all taskArrayList stored
      */
     public String getTaskListString() {
-        if (tasks.isEmpty()) {
-            return "No tasks added";
+        if (taskArrayList.isEmpty()) {
+            return "No taskArrayList added";
         }
 
         StringBuilder response = new StringBuilder();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            response.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            response.append(i + 1).append(". ").append(taskArrayList.get(i)).append("\n");
         }
 
         return response.toString();
-    }
-
-    /**
-     * Retrieves a specific task by its index. todo delete
-     *
-     * @param index The index of the task (0-based).
-     * @return The Task at the specified index.
-     */
-    public Task getTaskAt(int index) {
-        return tasks.get(index);
     }
 
     /**
@@ -88,10 +78,10 @@ public class TaskList {
      * @throws NovaException If the index is out of range or the task is already marked as done.
      */
     public void markTask(int index) throws NovaException {
-        Task task = tasks.get(index - 1);
+        Task task = taskArrayList.get(index - 1);
 
         if (task.isDone()) {
-            throw new NovaException("task is already done");
+            throw new NovaException("ERROR: task is already done");
         }
 
         task.setDone();
@@ -104,10 +94,10 @@ public class TaskList {
      * @throws NovaException If the index is out of range or the task is already unmarked.
      */
     public void unMarkTask(int index) throws NovaException {
-        Task task = tasks.get(index - 1);
+        Task task = taskArrayList.get(index - 1);
 
         if (!task.isDone()) {
-            throw new NovaException("task is already unmarked");
+            throw new NovaException("ERROR: task is already unmarked");
         }
 
         task.setNotDone();
@@ -117,10 +107,9 @@ public class TaskList {
      * Deletes a task from the list.
      *
      * @param index The index of the task.
-     * @throws NovaException If the index is out of range.
      */
-    public void deleteTask(int index) throws NovaException {
-        tasks.remove(index - 1);
+    public void deleteTask(int index) {
+        taskArrayList.remove(index - 1);
     }
 
     /**
@@ -130,7 +119,7 @@ public class TaskList {
      */
     public void addToDo(String desc) {
         Todo todo = new Todo(desc, false);
-        tasks.add(todo);
+        taskArrayList.add(todo);
     }
 
     /**
@@ -138,7 +127,7 @@ public class TaskList {
      */
     public void addDeadline(String description, String deadlineDate) {
         Deadline deadline = new Deadline(description, deadlineDate.replace("by ", ""));
-        tasks.add(deadline);
+        taskArrayList.add(deadline);
     }
 
     /**
@@ -150,30 +139,33 @@ public class TaskList {
 
         Event event = new Event(description, fromDate, toDate);
 
-        tasks.add(event);
+        taskArrayList.add(event);
     }
 
     /**
-     * Finds all tasks that matches the specified description
+     * Finds all taskArrayList that matches the specified description
      *
-     * @param description String used to match with tasks descriptions
+     * @param description String used to match with taskArrayList descriptions
      */
     public String findTask(String description) {
         StringBuilder response = new StringBuilder();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-
-            if (task.descriptionContains(description)) {
-                response.append(i + 1).append(". ").append(task).append("\n");
-            }
+        for (int i = 0; i < taskArrayList.size(); i++) {
+            addTaskIfMatch(description, i, response);
         }
 
         return response.toString();
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
-        this.tasks.clear();
-        this.tasks.addAll(tasks);
+    private void addTaskIfMatch(String description, int i, StringBuilder response) {
+        Task task = taskArrayList.get(i);
+        if (task.descriptionContains(description)) {
+            response.append(i + 1).append(". ").append(task).append("\n");
+        }
+    }
+
+    public void setTaskArrayList(ArrayList<Task> taskArrayList) {
+        this.taskArrayList.clear();
+        this.taskArrayList.addAll(taskArrayList);
     }
 }

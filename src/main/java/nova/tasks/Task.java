@@ -80,7 +80,7 @@ public abstract class Task implements Cloneable {
         try {
             return (Task) super.clone();
         } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }

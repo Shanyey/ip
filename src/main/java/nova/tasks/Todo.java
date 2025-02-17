@@ -6,16 +6,6 @@ package nova.tasks;
  * @author Shanyey
  */
 public class Todo extends Task {
-
-    /**
-     * Constructs a new To-do object with the specified description.
-     *
-     * @param description The description of the to-do task.
-     */
-    public Todo(String description) {
-        super(description);
-    }
-
     /**
      * Constructs a new to-do object with the specified description and completion status.
      *

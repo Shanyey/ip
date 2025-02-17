@@ -1,38 +1,38 @@
 Ughh, what can i do for you?
-saved tasks
-saved tasks
-saved tasks
+saved taskArrayList
+saved taskArrayList
+saved taskArrayList
 Marked [T][X] read book
-saved tasks
+saved taskArrayList
 Marked [D][X] return book (by: Jan 01 2024 19:30)
-saved tasks
+saved taskArrayList
 Marked [E][X] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
-saved tasks
-These are the tasks:
+saved taskArrayList
+These are the taskArrayList:
 1.[T][X] read book
 2.[D][X] return book (by: Jan 01 2024 19:30)
 3.[E][X] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
 Unmarked [T][ ] read book
-saved tasks
+saved taskArrayList
 Unmarked [D][ ] return book (by: Jan 01 2024 19:30)
-saved tasks
+saved taskArrayList
 Unmarked [E][ ] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
-saved tasks
-These are the tasks:
+saved taskArrayList
+These are the taskArrayList:
 1.[T][ ] read book
 2.[D][ ] return book (by: Jan 01 2024 19:30)
 3.[E][ ] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
 I knew you wouldn't do this task
 [E][ ] lecture (from: Feb 06 2025 10:00 to: Feb 06 2025 12:00)
-Now you have 2 tasks in the list.
-saved tasks
+Now you have 2 taskArrayList in the list.
+saved taskArrayList
 I knew you wouldn't do this task
 [D][ ] return book (by: Jan 01 2024 19:30)
-Now you have 1 tasks in the list.
-saved tasks
+Now you have 1 taskArrayList in the list.
+saved taskArrayList
 I knew you wouldn't do this task
 [T][ ] read book
-Now you have 0 tasks in the list.
-saved tasks
-No tasks added.
+Now you have 0 taskArrayList in the list.
+saved taskArrayList
+No taskArrayList added.
 Goodbye! Hope to see you never!

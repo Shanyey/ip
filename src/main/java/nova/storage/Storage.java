@@ -28,11 +28,15 @@ public class Storage {
      */
     public void saveTask(ArrayList<Task> tasks) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (Task task : tasks) {
-                bufferedWriter.write(task.getSaveData() + "\n");
-            }
+            writeToFile(tasks, bufferedWriter);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Saving error: " + e.getMessage());
+        }
+    }
+
+    private void writeToFile(ArrayList<Task> tasks, BufferedWriter bufferedWriter) throws IOException {
+        for (Task task : tasks) {
+            bufferedWriter.write(task.getSaveData() + "\n");
         }
     }
 
@@ -49,33 +53,11 @@ public class Storage {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_NAME))) {
             while ((line = bufferedReader.readLine()) != null) {
                 boolean isDone = line.charAt(4) == 'X';
+
                 switch (line.charAt(1)) {
-
-                case 'T' -> tasks.add(new Todo(line.substring(7), isDone));
-                case 'D' -> {
-                    int bracketIndex = line.indexOf("(by:");
-                    String desc = line.substring(7, bracketIndex).trim();
-
-                    int endBracketIndex = line.indexOf(')');
-                    String by = line.substring(bracketIndex + 1, endBracketIndex)
-                            .replace("by:", "").trim();
-
-                    Deadline deadline = new Deadline(desc, by, isDone);
-
-                    tasks.add(deadline);
-                }
-                case 'E' -> {
-                    int startBracketIndex = line.indexOf('(');
-                    int endBracketIndex = line.indexOf(')');
-                    int toIndex = line.indexOf("to:");
-
-                    String desc = line.substring(7, startBracketIndex).trim();
-                    String from = line.substring(startBracketIndex + 1, toIndex)
-                            .replace("from:", "").trim();
-                    String to = line.substring(toIndex, endBracketIndex).replace("to:", "").trim();
-
-                    tasks.add(new Event(desc, from, to, isDone));
-                }
+                case 'T' -> loadTodoTask(tasks, line, isDone);
+                case 'D' -> loadDeadlineTask(line, isDone, tasks);
+                case 'E' -> loadEventTask(line, tasks, isDone);
                 default -> {
                     //do nothing
                 }
@@ -85,5 +67,48 @@ public class Storage {
             System.out.println(e.getMessage());
         }
         return tasks;
+    }
+
+    private void loadEventTask(String line, ArrayList<Task> tasks, boolean isDone) {
+        int startBracketIndex = line.indexOf("(from: ");
+        int endBracketIndex = line.indexOf(')', startBracketIndex);
+        int toIndex = line.indexOf("to: ");
+
+        String desc = getTaskDesc(line, startBracketIndex);
+        String from = getEventFrom(line, startBracketIndex, toIndex);
+        String to = getEventTo(line, toIndex, endBracketIndex);
+        tasks.add(new Event(desc, from, to, isDone));
+    }
+
+    private String getEventFrom(String line, int startBracketIndex, int toIndex) {
+        return line.substring(startBracketIndex + 1, toIndex).replace("from:", "").trim();
+    }
+
+    private String getEventTo(String line, int toIndex, int endBracketIndex) {
+        return line.substring(toIndex, endBracketIndex).replace("to:", "").trim();
+    }
+
+    private static void loadDeadlineTask(String line, boolean isDone, ArrayList<Task> tasks) {
+        int bracketIndex = line.indexOf("(by:");
+        int endBracketIndex = line.indexOf(')');
+
+        String desc = getTaskDesc(line, bracketIndex);
+        String by = getDeadlineBy(line, bracketIndex, endBracketIndex);
+
+        Deadline deadline = new Deadline(desc, by, isDone);
+        tasks.add(deadline);
+    }
+
+    private static String getDeadlineBy(String line, int bracketIndex, int endBracketIndex) {
+        return line.substring(bracketIndex + 1, endBracketIndex).replace("by:", "").trim();
+    }
+
+    private static String getTaskDesc(String line, int bracketIndex) {
+        return line.substring(7, bracketIndex).trim();
+    }
+
+
+    private static void loadTodoTask(ArrayList<Task> tasks, String line, boolean isDone) {
+        tasks.add(new Todo(line.substring(7), isDone));
     }
 }

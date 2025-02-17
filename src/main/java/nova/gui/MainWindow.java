@@ -33,8 +33,10 @@ public class MainWindow {
     }
 
     private void showWelcomeMessage() {
-        String welcomeText = "Hello! I'm Nova, your personal assistant.\nHow can I help you today?\n" +
-                "If you require assistance, feel free to type help!";
+        String welcomeText = """
+                Hello! I'm Nova, your personal assistant.
+                How can I help you today?
+                If you require assistance, feel free to type help!""";
         dialogContainer.getChildren().add(DialogBox.getNovaDialog(welcomeText, novaImage));
     }
 
