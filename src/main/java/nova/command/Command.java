@@ -153,7 +153,7 @@ public class Command {
     public String executeRedo() {
         try {
             tasklist.setTaskArrayList(historyManager.getRedoState(tasklist.getTaskArrayList()));
-            return "Redo completed";
+            return "Your action has been reverted :)";
         } catch (NovaException e) {
             return e.getMessage();
         }
