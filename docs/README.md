@@ -41,7 +41,6 @@ Your wish is my command UwU
 
 ## Mark Task
 
-// Feature details
 Mark a task as done
 
 Example: `mark 1`
@@ -86,7 +85,6 @@ Your wish is my command UwU
 
 ## Undo Action
 
-// Feature details
 Undo the previous action that edited tasks
 
 Example: `undo`
@@ -98,7 +96,6 @@ your action has been undone :)
 
 ## Redo Action
 
-// Feature details
 Re-applies an undone action
 
 Example: `redo`
