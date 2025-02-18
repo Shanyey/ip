@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import nova.exceptions.NovaException;
 import nova.tasks.Deadline;
 import nova.tasks.Event;
 import nova.tasks.Task;
@@ -77,7 +78,11 @@ public class Storage {
         String desc = getTaskDesc(line, startBracketIndex);
         String from = getEventFrom(line, startBracketIndex, toIndex);
         String to = getEventTo(line, toIndex, endBracketIndex);
-        tasks.add(new Event(desc, from, to, isDone));
+        try {
+            tasks.add(new Event(desc, from, to, isDone));
+        } catch (NovaException e) {
+            System.out.println("This should not happen");
+        }
     }
 
     private String getEventFrom(String line, int startBracketIndex, int toIndex) {

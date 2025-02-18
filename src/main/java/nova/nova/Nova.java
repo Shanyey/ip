@@ -39,22 +39,23 @@ public class Nova {
      */
     public String getResponse(String input) {
         String response;
+        String cleanedInput = input.trim().toLowerCase().replaceAll("\\s+", " ");
 
-        if (input.isEmpty()) {
+        if (cleanedInput.isEmpty()) {
             response = "ERROR: No command given";
-        } else if (input.equalsIgnoreCase("bye")) {
+        } else if (cleanedInput.equals("bye")) {
             storage.saveTask(taskList.getTaskArrayList());
             response = command.executeBye();
-        } else if (input.equalsIgnoreCase("list")) {
+        } else if (cleanedInput.equals("list")) {
             response = command.executeList();
-        } else if (input.equalsIgnoreCase("undo")) {
+        } else if (cleanedInput.equals("undo")) {
             response = command.executeUndo();
-        } else if (input.equalsIgnoreCase("redo")) {
+        } else if (cleanedInput.equals("redo")) {
             response = command.executeRedo();
-        } else if (input.equalsIgnoreCase("help")) {
+        } else if (cleanedInput.equals("help")) {
             response = command.executeHelp();
         } else {
-            response = command.executeCommand(input);
+            response = command.executeCommand(cleanedInput);
         }
         return ui.returnMessage(response);
     }

@@ -108,12 +108,17 @@ public class Command {
             return "ERROR: Invalid format";
         }
 
-        tasklist.addDeadline(description, deadlineDate);
+        try {
+            tasklist.addDeadline(description, deadlineDate);
+        } catch (NovaException e) {
+            return e.getMessage();
+        }
+
         return "added deadline " + description + " OwU!";
     }
 
     private String executeAddEvent(String[] slashedInput) {
-        if (slashedInput.length < 3) {
+        if (slashedInput.length != 3) {
             return "ERROR: Too little arguments";
         }
 
@@ -126,8 +131,14 @@ public class Command {
         }
 
         saveState();
-        this.tasklist.addEvent(description, from, to);
-        return "added event" + description + " :("    ;
+
+        try {
+            this.tasklist.addEvent(description, from, to);
+        } catch (NovaException e) {
+            return e.getMessage();
+        }
+
+        return "added event " + description + " :("    ;
     }
 
     public String executeUndo() {
@@ -159,7 +170,8 @@ public class Command {
                 /to <YYYY-MM-DD HH:MM>
                 """;
 
-        return singleCommands + todoCommand + deadlineCommand + eventCommand;
+        String disclaimer = "\n!!! Please do not use '/' in your descriptions !!!";
+        return singleCommands + todoCommand + deadlineCommand + eventCommand + disclaimer;
     }
 
     public String executeCommand(String input) {

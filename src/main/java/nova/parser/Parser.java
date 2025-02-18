@@ -20,7 +20,6 @@ public class Parser {
         assert action != null : "ERROR: action cannot be null";
 
         String[] splitAction = action.trim().split(" ", 2);
-
         if (splitAction.length == 1) {
             throw new NovaException("ERROR: too little arguments or invalid command");
         }

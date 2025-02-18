@@ -2,6 +2,9 @@ package nova.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import nova.exceptions.NovaException;
 
 /**
  * Represents an event task, which is a subtype of the Task class.
@@ -24,13 +27,27 @@ public class Event extends Task {
      * @param startingDate The start date/time of the event in "yyyy-MM-dd HH:mm" format.
      * @param by The end date/time of the event in "yyyy-MM-dd HH:mm" format.
      */
-    public Event(String description, String startingDate, String by) {
+    public Event(String description, String startingDate, String by) throws NovaException {
         super(description);
 
         this.by = by;
         this.startingDate = startingDate;
-        this.start = LocalDateTime.parse(startingDate, formatter);
-        this.end = LocalDateTime.parse(by, formatter);
+
+        try {
+            this.start = LocalDateTime.parse(startingDate, formatter);
+            this.end = LocalDateTime.parse(by, formatter);
+        } catch (DateTimeParseException e) {
+            throw new NovaException("ERROR: invalid date time format");
+        }
+
+        if (end.isBefore(LocalDateTime.now())) {
+            throw new NovaException("ERROR: deadline should be in the future.");
+        }
+
+        if (!start.isBefore(end)) {
+            throw new NovaException("ERROR: start date must be before end date");
+        }
+
         this.saveData = "[E]" + super.toString() + " (from: " + startingDate + " to: " + by + ")";
     }
 
@@ -42,7 +59,7 @@ public class Event extends Task {
      * @param by The end date/time of the event in "yyyy-MM-dd HH:mm" format.
      * @param isDone A boolean indicating whether the event is completed.
      */
-    public Event(String description, String startingDate, String by, Boolean isDone) {
+    public Event(String description, String startingDate, String by, Boolean isDone) throws NovaException {
         super(description, isDone);
 
         this.by = by;

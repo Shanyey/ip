@@ -59,7 +59,7 @@ public class TaskList {
      */
     public String getTaskListString() {
         if (taskArrayList.isEmpty()) {
-            return "No taskArrayList added";
+            return "No tasks added";
         }
 
         StringBuilder response = new StringBuilder();
@@ -125,7 +125,7 @@ public class TaskList {
     /**
      * Adds a new Deadline task to the list.
      */
-    public void addDeadline(String description, String deadlineDate) {
+    public void addDeadline(String description, String deadlineDate) throws NovaException {
         Deadline deadline = new Deadline(description, deadlineDate.replace("by ", ""));
         taskArrayList.add(deadline);
     }
@@ -133,12 +133,11 @@ public class TaskList {
     /**
      * Adds a new Event task to the list.
      */
-    public void addEvent(String description, String from, String to) {
+    public void addEvent(String description, String from, String to) throws NovaException {
         String fromDate = from.replace("from ", "");
         String toDate = to.replace("to ", "");
 
         Event event = new Event(description, fromDate, toDate);
-
         taskArrayList.add(event);
     }
 

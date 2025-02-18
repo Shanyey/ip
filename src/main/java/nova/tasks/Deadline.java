@@ -2,6 +2,9 @@ package nova.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import nova.exceptions.NovaException;
 
 /**
  * Represents a deadline task, which is a subtype of the Task class.
@@ -21,11 +24,20 @@ public class Deadline extends Task {
      * @param description The description of the deadline task.
      * @param by The deadline in "yyyy-MM-dd HH:mm" format.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws NovaException {
         super(description);
 
+        try {
+            this.deadline = LocalDateTime.parse(by, formatter);
+        } catch (DateTimeParseException e) {
+            throw new NovaException("ERROR: invalid date time format.");
+        }
+
+        if (deadline.isBefore(LocalDateTime.now())) {
+            throw new NovaException("ERROR: deadline should be in the future.");
+        }
+
         this.by = by;
-        this.deadline = LocalDateTime.parse(by, formatter);
         this.saveData = "[D]" + super.toString() + " (by: " + by + ")";
     }
 
