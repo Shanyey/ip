@@ -306,6 +306,6 @@ public class Command {
         }
 
         //execute
-        return "try catch failed";
+        return "ERROR: I dont know what you are trying to say";
     }
 }
