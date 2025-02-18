@@ -92,6 +92,11 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + start + " to: " + end + ")";
     }
 
+    /**
+     * Creates and returns a copy of this event instance.
+     *
+     * @return a cloned copy of this event object.
+     */
     @Override
     public Event clone() {
         return (Event) super.clone();

@@ -1,7 +1,6 @@
 package nova.gui;
 
 import javafx.application.Application;
-
 import nova.Main;
 
 /**

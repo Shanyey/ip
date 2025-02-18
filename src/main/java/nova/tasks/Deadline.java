@@ -78,6 +78,11 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 
+    /**
+     * Creates and returns a copy of this deadline instance.
+     *
+     * @return a cloned copy of this deadline object.
+     */
     @Override
     public Deadline clone() {
         return (Deadline) super.clone();

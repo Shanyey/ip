@@ -36,6 +36,11 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Creates and returns a copy of this To-do instance.
+     *
+     * @return a cloned copy of this To-do object.
+     */
     @Override
     public Todo clone() {
         return (Todo) super.clone();

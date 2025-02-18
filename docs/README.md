@@ -27,7 +27,7 @@ Your wish is my command UwU
 added event Lecture :(
 ```
 
-## Feature List
+## List
 
 Displays all added tasks
 
@@ -39,7 +39,7 @@ Your wish is my command UwU
 3.[E][ ] Lecture (from: Feb 19 2025 12:00 to: Feb 19 2025 14:00)
 ```
 
-## Feature Mark Task
+## Mark Task
 
 // Feature details
 Mark a task as done
@@ -51,7 +51,7 @@ Your wish is my command UwU
 marked task as done OwO
 ```
 
-## Feature Unmark Task
+## Unmark Task
 
 Mark a task as not done
 
@@ -62,7 +62,7 @@ Your wish is my command UwU
 unmarked your task OwO
 ```
 
-## Feature Delete Task
+## Delete Task
 
 Deletes a task
 
@@ -73,7 +73,7 @@ Your wish is my command UwU
 deleted your task OwO
 ```
 
-## Feature Find Task
+## Find Task
 
 Finds a task based on the description
 
@@ -84,7 +84,7 @@ Your wish is my command UwU
 1.[T][ ] Read Book
 ```
 
-## Feature Undo Action
+## Undo Action
 
 // Feature details
 Undo the previous action that edited tasks
@@ -96,7 +96,7 @@ Your wish is my command UwU
 your action has been undone :)
 ```
 
-## Feature Redo Action
+## Redo Action
 
 // Feature details
 Re-applies an undone action
@@ -108,7 +108,7 @@ Your wish is my command UwU
 your action has been reverted :)
 ```
 
-## Feature Help
+## Help
 
 Provides functions and command formats
 
@@ -131,7 +131,7 @@ event <description> /from <YYY-MM-DD HH:MM> /to <YYY-MM-DD HH:MM>
 !!! Please do not use '/' in your descriptions !!!
 ```
 
-## Feature Bye
+## Exit
 
 Exits the chatbot
 

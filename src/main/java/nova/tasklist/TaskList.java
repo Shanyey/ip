@@ -156,6 +156,13 @@ public class TaskList {
         return response.toString();
     }
 
+    /**
+     * Appends a task's information to the response if its description matches the given description.
+     *
+     * @param description the substring to match within the task's description
+     * @param i the index of the task in the task list
+     * @param response the StringBuilder used to accumulate matching task details
+     */
     private void addTaskIfMatch(String description, int i, StringBuilder response) {
         Task task = taskArrayList.get(i);
         if (task.descriptionContains(description)) {
@@ -163,6 +170,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Replaces the current task list with the tasks provided in the given list.
+     *
+     * @param taskArrayList the list of tasks to set as the new task list
+     */
     public void setTaskArrayList(ArrayList<Task> taskArrayList) {
         this.taskArrayList.clear();
         this.taskArrayList.addAll(taskArrayList);

@@ -1,9 +1,9 @@
 package nova.tasklist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,8 @@ public class TaskListTest {
         TaskList taskList = new TaskList(tasks);
         assertTrue(taskList.isEmpty(), "TaskList should be empty when initialized with an empty list.");
         assertEquals(0, taskList.size(), "Size of TaskList should be 0.");
-        assertEquals("No tasks added", taskList.getTaskListString(), "Empty task list string should indicate no tasks added.");
+        assertEquals("No tasks added", taskList.getTaskListString(),
+                "Empty task list string should indicate no tasks added.");
     }
 
     @Test
@@ -32,7 +33,8 @@ public class TaskListTest {
         assertEquals(1, taskList.size(), "TaskList size should be 1 after adding one task.");
 
         String taskListString = taskList.getTaskListString();
-        assertTrue(taskListString.contains("Read book"), "Task list string should contain the todo description.");
+        assertTrue(taskListString.contains("Read book"),
+                "Task list string should contain the todo description.");
     }
 
     @Test
@@ -46,14 +48,16 @@ public class TaskListTest {
 
         // Marking the same task again should throw an exception
         NovaException markException = assertThrows(NovaException.class, () -> taskList.markTask(1));
-        assertEquals("ERROR: task is already done", markException.getMessage(), "Expected error when marking an already done task.");
+        assertEquals("ERROR: task is already done", markException.getMessage(),
+                "Expected error when marking an already done task.");
 
         // Unmark the task
         taskList.unMarkTask(1);
 
         // Unmarking the task again should throw an exception
         NovaException unmarkException = assertThrows(NovaException.class, () -> taskList.unMarkTask(1));
-        assertEquals("ERROR: task is already unmarked", unmarkException.getMessage(), "Expected error when unmarking an already unmarked task.");
+        assertEquals("ERROR: task is already unmarked", unmarkException.getMessage(),
+                "Expected error when unmarking an already unmarked task.");
     }
 
     @Test

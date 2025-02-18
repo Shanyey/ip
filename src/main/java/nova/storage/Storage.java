@@ -35,6 +35,13 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the save data of each task in the provided list to the given BufferedWriter.
+     *
+     * @param tasks the list of tasks whose data will be written to the file
+     * @param bufferedWriter the writer used to output the task data
+     * @throws IOException if an I/O error occurs during writing
+     */
     private void writeToFile(ArrayList<Task> tasks, BufferedWriter bufferedWriter) throws IOException {
         for (Task task : tasks) {
             bufferedWriter.write(task.getSaveData() + "\n");
@@ -70,6 +77,13 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Loads an event task from the given line and adds it to the specified task list.
+     *
+     * @param line the line containing the event task data
+     * @param tasks the list of tasks to which the event will be added
+     * @param isDone the completion status of the event task
+     */
     private void loadEventTask(String line, ArrayList<Task> tasks, boolean isDone) {
         int startBracketIndex = line.indexOf("(from: ");
         int endBracketIndex = line.indexOf(')', startBracketIndex);
@@ -85,14 +99,37 @@ public class Storage {
         }
     }
 
+    /**
+     * Extracts the start time for an event from the given line.
+     *
+     * @param line the line containing the event details
+     * @param startBracketIndex the index where the event detail block starts (containing "from:")
+     * @param toIndex the index where the "to:" substring begins
+     * @return the extracted start time for the event
+     */
     private String getEventFrom(String line, int startBracketIndex, int toIndex) {
         return line.substring(startBracketIndex + 1, toIndex).replace("from:", "").trim();
     }
 
+    /**
+     * Extracts the end time for an event from the given line.
+     *
+     * @param line the line containing the event details
+     * @param toIndex the index where the "to:" substring starts
+     * @param endBracketIndex the index of the closing bracket for the event details
+     * @return the extracted end time for the event
+     */
     private String getEventTo(String line, int toIndex, int endBracketIndex) {
         return line.substring(toIndex, endBracketIndex).replace("to:", "").trim();
     }
 
+    /**
+     * Loads a deadline task from the given line and adds it to the specified task list.
+     *
+     * @param line the line containing the deadline task data
+     * @param isDone the completion status of the deadline task
+     * @param tasks the list of tasks to which the deadline will be added
+     */
     private static void loadDeadlineTask(String line, boolean isDone, ArrayList<Task> tasks) {
         int bracketIndex = line.indexOf("(by:");
         int endBracketIndex = line.indexOf(')');
@@ -104,15 +141,37 @@ public class Storage {
         tasks.add(deadline);
     }
 
+    /**
+     * Extracts the deadline time from a deadline task line.
+     *
+     * @param line the line containing the deadline task data
+     * @param bracketIndex the index where the deadline details start (containing "by:")
+     * @param endBracketIndex the index of the closing bracket for the deadline details
+     * @return the extracted deadline time
+     */
     private static String getDeadlineBy(String line, int bracketIndex, int endBracketIndex) {
         return line.substring(bracketIndex + 1, endBracketIndex).replace("by:", "").trim();
     }
 
+    /**
+     * Extracts the task description from the given line, stopping at the specified bracket index.
+     *
+     * @param line the line containing the task data
+     * @param bracketIndex the index where task details (e.g., date/time info) begin
+     * @return the extracted task description
+     */
     private static String getTaskDesc(String line, int bracketIndex) {
         return line.substring(7, bracketIndex).trim();
     }
 
 
+    /**
+     * Loads a to-do task from the given line and adds it to the specified task list.
+     *
+     * @param tasks the list of tasks to which the to-do task will be added
+     * @param line the line containing the to-do task data
+     * @param isDone the completion status of the to-do task
+     */
     private static void loadTodoTask(ArrayList<Task> tasks, String line, boolean isDone) {
         tasks.add(new Todo(line.substring(7), isDone));
     }

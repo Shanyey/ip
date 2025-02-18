@@ -26,6 +26,9 @@ public class MainWindow {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/userImage.png"));
     private final Image novaImage = new Image(this.getClass().getResourceAsStream("/images/nova.png"));
 
+    /**
+     * Creates dialog container and shows welcome message on initialisation
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

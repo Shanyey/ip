@@ -76,6 +76,11 @@ public abstract class Task implements Cloneable {
         return this.description.contains(description);
     }
 
+    /**
+     * Creates and returns a copy of this task instance.
+     *
+     * @return a cloned copy of this task object.
+     */
     public Task clone() {
         try {
             return (Task) super.clone();

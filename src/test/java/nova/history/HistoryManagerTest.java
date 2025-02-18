@@ -37,7 +37,8 @@ class HistoryManagerTest {
         // Undo: get previous state; this should be the state with only "Task 1".
         ArrayList<Task> previousState = historyManager.getUndoState(tasks);
         assertEquals(1, previousState.size(), "Undo state should have one task");
-        assertEquals("Task 1", previousState.get(0).toString().substring(7).trim(), "The undone state should contain 'Task 1'");
+        assertEquals("Task 1", previousState.get(0).toString().substring(7).trim(),
+                "The undone state should contain 'Task 1'");
 
         // The getUndoState call pushes a deep copy of the current state onto the redo stack.
         // So now, calling redo on the previous state should restore the state with 2 tasks.

@@ -1,13 +1,13 @@
 package nova;
 
 import java.io.IOException;
-import javafx.scene.image.Image;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import nova.gui.MainWindow;
 import nova.nova.Nova;
 
@@ -27,7 +27,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setTitle("Nova");
             stage.getIcons().add(new Image("/images/nova.png"));
-            fxmlLoader.<MainWindow>getController().setNova(nova);  // inject the Nova instance
+            fxmlLoader.<MainWindow>getController().setNova(nova); // inject the Nova instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
