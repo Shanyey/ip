@@ -1,6 +1,7 @@
 package nova.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -8,31 +9,44 @@ import nova.exceptions.NovaException;
 
 
 public class ParserTest {
+    private final Parser parser = new Parser();
 
     @Test
-    public void parseBySpace_exceptionThrown() {
-        try {
-            Parser p = new Parser();
-            String invalidInput = "todo";
-            p.parseBySpace(invalidInput);
-        } catch (NovaException e) {
-            assertEquals("too little arguments or invalid command", e.getMessage());
-        }
+    public void testParseBySpaceValidInput() throws NovaException {
+        String input = "todo read book";
+        String[] result = parser.parseBySpace(input);
+        assertEquals(2, result.length, "Expected exactly two parts.");
+        assertEquals("todo", result[0], "First part should be the command.");
+        assertEquals("read book", result[1], "Second part should be the argument.");
     }
 
     @Test
-    public void parseBySpace_success() {
-        Parser p = new Parser();
-        String[] words;
-        try {
-            String correctInput = "todo read book";
-            words = p.parseBySpace(correctInput);
-            assertEquals("todo", words[0]);
-            assertEquals("read book", words[1]);
-        } catch (NovaException e) {
-            throw new RuntimeException(e);
-        }
-
+    public void testParseBySpaceInsufficientArguments() {
+        String input = "todo";
+        NovaException exception = assertThrows(NovaException.class, () -> {
+            parser.parseBySpace(input);
+        });
+        assertEquals("ERROR: too little arguments or invalid command", exception.getMessage());
     }
 
+    @Test
+    public void testParseBySpaceWithExtraWhitespace() throws NovaException {
+        String input = "   deadline    finish assignment   ";
+        String[] result = parser.parseBySpace(input);
+
+        // After trim and splitting, result[0] should be "deadline"
+        // result[1] should be "   finish assignment" which will be trimmed
+        assertEquals("deadline", result[0]);
+        assertEquals("finish assignment", result[1].trim());
+    }
+
+    @Test
+    public void testSplitBySlashMultipleTokens() {
+        String input = "first/second/third";
+        String[] result = parser.splitBySlash(input);
+        assertEquals(3, result.length, "Expected three tokens split by '/'");
+        assertEquals("first", result[0]);
+        assertEquals("second", result[1]);
+        assertEquals("third", result[2]);
+    }
 }
