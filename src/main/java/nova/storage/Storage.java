@@ -92,6 +92,7 @@ public class Storage {
         String desc = getTaskDesc(line, startBracketIndex);
         String from = getEventFrom(line, startBracketIndex, toIndex);
         String to = getEventTo(line, toIndex, endBracketIndex);
+
         try {
             tasks.add(new Event(desc, from, to, isDone));
         } catch (NovaException e) {

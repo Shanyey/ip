@@ -34,8 +34,7 @@ public class ParserTest {
         String input = "   deadline    finish assignment   ";
         String[] result = parser.parseBySpace(input);
 
-        // After trim and splitting, result[0] should be "deadline"
-        // result[1] should be "   finish assignment" which will be trimmed
+        // After trim and splitting, result[0] = "deadline", result[1] = "   finish assignment"
         assertEquals("deadline", result[0]);
         assertEquals("finish assignment", result[1].trim());
     }

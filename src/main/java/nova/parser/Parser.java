@@ -7,6 +7,7 @@ import nova.exceptions.NovaException;
  * It supports splitting input commands by spaces and slashes to extract meaningful components.
  */
 public class Parser {
+
     /**
      * Splits a given action string by the first space encountered.
      * Ensures that the input contains at least two components.

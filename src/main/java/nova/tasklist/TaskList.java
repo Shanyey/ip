@@ -63,12 +63,18 @@ public class TaskList {
         }
 
         StringBuilder response = new StringBuilder();
+        buildResponse(response);
+        return response.toString();
+    }
 
+    /**
+     * Builds the string containing all tasks
+     * @param response The StringBuilder object to build up
+     */
+    private void buildResponse(StringBuilder response) {
         for (int i = 0; i < taskArrayList.size(); i++) {
             response.append(i + 1).append(". ").append(taskArrayList.get(i)).append("\n");
         }
-
-        return response.toString();
     }
 
     /**

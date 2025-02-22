@@ -21,7 +21,7 @@ public class TaskListTest {
         assertTrue(taskList.isEmpty(), "TaskList should be empty when initialized with an empty list.");
         assertEquals(0, taskList.size(), "Size of TaskList should be 0.");
         assertEquals("No tasks added", taskList.getTaskListString(),
-                "Empty task list string should indicate no tasks added.");
+                "Empty task list string should return no tasks added.");
     }
 
     @Test
@@ -43,18 +43,16 @@ public class TaskListTest {
         TaskList taskList = new TaskList(tasks);
         taskList.addToDo("Write report");
 
-        // Mark the task as done
         taskList.markTask(1);
 
-        // Marking the same task again should throw an exception
+        // Marking again should throw an exception
         NovaException markException = assertThrows(NovaException.class, () -> taskList.markTask(1));
         assertEquals("ERROR: task is already done", markException.getMessage(),
                 "Expected error when marking an already done task.");
 
-        // Unmark the task
         taskList.unMarkTask(1);
 
-        // Unmarking the task again should throw an exception
+        // Unmarking again should throw an exception
         NovaException unmarkException = assertThrows(NovaException.class, () -> taskList.unMarkTask(1));
         assertEquals("ERROR: task is already unmarked", unmarkException.getMessage(),
                 "Expected error when unmarking an already unmarked task.");
@@ -80,7 +78,7 @@ public class TaskListTest {
         taskList.addToDo("Buy bread");
         taskList.addToDo("Read book");
 
-        // Should find both "Buy milk" and "Buy bread", but not "Read book"
+        // Should find both "Buy milk" and "Buy bread"
         String result = taskList.findTask("Buy");
 
         assertTrue(result.contains("Buy milk"), "Find should return tasks containing 'Buy milk'.");
@@ -93,7 +91,6 @@ public class TaskListTest {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskList taskList = new TaskList(tasks);
 
-        // Example deadline date string; the addDeadline method expects "by " to be present.
         taskList.addDeadline("Submit assignment", "by 2025-12-31 23:59");
         assertEquals(1, taskList.size(), "TaskList size should increase after adding a deadline.");
 
@@ -106,7 +103,6 @@ public class TaskListTest {
         ArrayList<Task> tasks = new ArrayList<>();
         TaskList taskList = new TaskList(tasks);
 
-        // Example event command parts; the addEvent method expects "from " and "to " prefixes.
         taskList.addEvent("New Year's Party", "from 2025-12-31 20:00", "to 2026-01-01 02:00");
         assertEquals(1, taskList.size(), "TaskList size should increase after adding an event.");
 

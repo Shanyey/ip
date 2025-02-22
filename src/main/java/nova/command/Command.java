@@ -75,12 +75,14 @@ public class Command {
      */
     private String executeMark(String index) {
         try {
+            //Throws NumberFormatException
             int taskIndex = Integer.parseInt(index);
 
+            //Throws NovaException
             checkValidIndex(taskIndex);
+
             saveState();
             this.tasklist.markTask(taskIndex);
-
             return "marked task as done OwO";
         } catch (NovaException e) {
             return e.getMessage();
@@ -97,12 +99,14 @@ public class Command {
      */
     private String executeUnMark(String index) {
         try {
+            //Throws NumberFormatException
             int taskIndex = Integer.parseInt(index);
 
+            //Throws NovaException
             checkValidIndex(taskIndex);
+
             saveState();
             this.tasklist.unMarkTask(taskIndex);
-
             return "unmarked your task OwO";
         } catch (NovaException e) {
             return e.getMessage();
@@ -129,12 +133,14 @@ public class Command {
      */
     private String executeDelete(String index) {
         try {
+            //Throws NumberFormatException
             int taskIndex = Integer.parseInt(index);
 
+            // Throws NovaException
             checkValidIndex(taskIndex);
+
             saveState();
             this.tasklist.deleteTask(taskIndex);
-
             return "deleted your task OwO";
         } catch (NovaException e) {
             return e.getMessage();
@@ -162,15 +168,17 @@ public class Command {
      * @return a confirmation message if the task is added, or an error message if the input is invalid
      */
     private String executeAddDeadline(String[] slashedInput) {
-        if (slashedInput.length < 2) {
-            return "ERROR: Too little arguments";
+        String nullIfValid = validDeadlineLength(slashedInput);
+        if (nullIfValid != null) {
+            return nullIfValid;
         }
 
         String description = slashedInput[0].trim();
         String deadlineDate = slashedInput[1].trim();
 
-        if (description.isEmpty() || !deadlineDate.contains("by ")) {
-            return "ERROR: Invalid format";
+        nullIfValid = validDeadlineInput(description, deadlineDate);
+        if (nullIfValid != null) {
+            return nullIfValid;
         }
 
         saveState();
@@ -184,6 +192,20 @@ public class Command {
         return "added deadline " + description + " OwU!";
     }
 
+    private String validDeadlineLength(String[] slashedInput) {
+        if (slashedInput.length < 2) {
+            return "ERROR: Too little arguments";
+        }
+        return null;
+    }
+
+    private String validDeadlineInput(String description, String deadlineDate) {
+        if (description.isEmpty() || !deadlineDate.contains("by ")) {
+            return "ERROR: Invalid format";
+        }
+        return null;
+    }
+
     /**
      * Executes the add-event command to add a new event task.
      *
@@ -191,16 +213,18 @@ public class Command {
      * @return a confirmation message if the event is added, or an error message if the input is invalid
      */
     private String executeAddEvent(String[] slashedInput) {
-        if (slashedInput.length != 3) {
-            return "ERROR: Too little arguments";
+        String nullIfInvalid = validEventLength(slashedInput);
+        if (nullIfInvalid != null) {
+            return nullIfInvalid;
         }
 
         String description = slashedInput[0].trim();
         String from = slashedInput[1].trim();
         String to = slashedInput[2].trim();
 
-        if (description.isEmpty() || !from.contains("from ") || !to.contains("to ")) {
-            return "ERROR: Invalid format";
+        nullIfInvalid = validEventInput(description, from, to);
+        if (nullIfInvalid != null) {
+            return nullIfInvalid;
         }
 
         saveState();
@@ -212,6 +236,20 @@ public class Command {
         }
 
         return "added event " + description + " :(";
+    }
+
+    private static String validEventInput(String description, String from, String to) {
+        if (description.isEmpty() || !from.contains("from ") || !to.contains("to ")) {
+            return "ERROR: Invalid format";
+        }
+        return null;
+    }
+
+    private static String validEventLength(String[] slashedInput) {
+        if (slashedInput.length != 3) {
+            return "ERROR: Too little arguments";
+        }
+        return null;
     }
 
     /**
